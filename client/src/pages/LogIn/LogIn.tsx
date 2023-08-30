@@ -10,7 +10,7 @@ export default () => {
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault()
     // get user's id if there's such a user
-    const user_id = await axios.get(`${process.env.REACT_APP_API}/users/${username}`)
+    const user_id = await axios.get(`${process.env.REACT_APP_API}/users/username/${username}`)
       .then(res => res.data?._id)
     // if no such a user, display error
     if(!user_id) setError(true)
