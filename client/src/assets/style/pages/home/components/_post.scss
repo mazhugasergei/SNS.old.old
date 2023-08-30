@@ -1,0 +1,21 @@
+main.home{
+  .post{
+    display: block;
+    background: #fff;
+    border: $border;
+    border-radius: 1rem;
+    padding: 1.25rem;
+
+    .author{
+      font-size: .75rem;
+      font-weight: 500;
+      margin-bottom: .5rem;
+    }
+  
+    .title{
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+  }
+}

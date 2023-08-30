@@ -1,0 +1,10 @@
+input{
+  &[type=text], &[type=password]{
+    font-size: 1rem;
+    border: $border;
+    border-radius: .75rem;
+    padding: 1.25rem;
+    &::placeholder{ color: #aaa; }
+    &:focus-visible{ outline-color: $primary; }
+  }
+}

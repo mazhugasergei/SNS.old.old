@@ -1,0 +1,7 @@
+:root{
+  --wrapper-padding-inline: 1.5rem;
+}
+
+.wrapper{
+  padding-inline: var(--wrapper-padding-inline);
+}

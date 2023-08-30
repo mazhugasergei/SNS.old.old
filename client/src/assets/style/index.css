@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #FBFCFD;
+}
+
+body, button, input {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #273138;
+}
+
+a {
+  text-decoration: none;
+  color: #273138;
+}
+
+:root {
+  --wrapper-padding-inline: 1.5rem;
+}
+
+.wrapper {
+  padding-inline: var(--wrapper-padding-inline);
+}
+
+button {
+  border: none;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 100vmax;
+  font-size: 0.96rem;
+  font-weight: 500;
+  padding: 1.25rem 1.75rem;
+}
+.btn:not(.outline, .transparent) {
+  background: #273138;
+  color: #fff;
+}
+.btn.outline {
+  border: 0.0625rem solid #e7e8ec;
+}
+
+input[type=text], input[type=password] {
+  font-size: 1rem;
+  border: 0.0625rem solid #e7e8ec;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+input[type=text]::-moz-placeholder, input[type=password]::-moz-placeholder {
+  color: #aaa;
+}
+input[type=text]::placeholder, input[type=password]::placeholder {
+  color: #aaa;
+}
+input[type=text]:focus-visible, input[type=password]:focus-visible {
+  outline-color: #273138;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding-block: 1.5rem;
+}
+header .logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-right: auto;
+}
+header .account-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+main.home .posts {
+  display: grid;
+  gap: 1rem;
+}
+
+main.home .post {
+  display: block;
+  background: #fff;
+  border: 0.0625rem solid #e7e8ec;
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+main.home .post .author {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+main.home .post .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+main.log-in_sign-up .title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 2rem;
+}
+main.log-in_sign-up form {
+  display: grid;
+  gap: 1rem;
+}
+main.log-in_sign-up form button {
+  font-size: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+main.log-in_sign-up .not-a-robot {
+  padding-bottom: 0.75rem;
+}
+main.log-in_sign-up .not-a-robot label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+main.log-in_sign-up .not-a-robot label .checkbox {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  background: #fff;
+  border: 0.0625rem solid #e7e8ec;
+  border-radius: 0.25rem;
+}
+main.log-in_sign-up .not-a-robot label .checkbox::before {
+  content: "";
+  position: absolute;
+  inset: 0.125rem;
+  border-radius: 0.125rem;
+}
+main.log-in_sign-up .not-a-robot label span {
+  font-size: 0.975rem;
+}
+main.log-in_sign-up .not-a-robot input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+main.log-in_sign-up .not-a-robot input[type=checkbox]:checked + label .checkbox::before {
+  background: #273138;
+}
+main.log-in_sign-up .not-a-robot input[type=checkbox]:focus-visible + label .checkbox {
+  outline: auto;
+}
+main.log-in_sign-up .sing-up-link {
+  text-align: center;
+  padding-block: 1rem;
+}
+main.log-in_sign-up .sing-up-link a {
+  font-weight: 600;
+  text-decoration: underline;
+}/*# sourceMappingURL=index.css.map */
