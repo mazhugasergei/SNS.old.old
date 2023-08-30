@@ -1,7 +1,7 @@
 export default () => {
   return (
     <main className="log-in_sign-up wrapper">
-      <div className="title">Sign up</div>
+      <div className="title">Create your account</div>
       <form>
         <input type="text" placeholder="Username" />
         <input type="password" placeholder="Password" />

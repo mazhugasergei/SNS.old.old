@@ -14,7 +14,7 @@ export default () => {
   const [posts, setPosts] = useState<Post[] | null>(null)
 
   useEffect(()=>{
-    axios.get(`http://localhost:3001/api/posts`)
+    axios.get(`${process.env.REACT_APP_API}/posts`)
       .then(res => setPosts(res.data))
   }, [])
 

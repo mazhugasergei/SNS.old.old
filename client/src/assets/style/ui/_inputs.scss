@@ -5,6 +5,10 @@ input{
     border-radius: .75rem;
     padding: 1.25rem;
     &::placeholder{ color: #aaa; }
-    &:focus-visible{ outline-color: $primary; }
+    &:focus-visible{ outline: auto !important; }
+    &.error{
+      outline: auto;
+      outline-color: $error !important;
+    }
   }
 }

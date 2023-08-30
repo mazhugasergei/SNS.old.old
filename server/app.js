@@ -15,7 +15,7 @@ app.use(cors({ origin: process.env.CORS_ORIGIN }))
 // routes
 app.use('/api/posts', posts_router)
 app.use('/api/users', users_router)
-app.use('/api/password', passwords_router)
+app.use('/api/passwords', passwords_router)
 
 // connect to db
 mongoose.connect(process.env.MONGODB_URI)

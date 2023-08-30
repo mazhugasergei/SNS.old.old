@@ -7,7 +7,7 @@ const users_get = async (req, res) => {
 }
 
 const user_get = async (req, res) => {
-  await User.findById(req.params.id)
+  await User.findOne({ username: req.params.username })
   .then(result => res.json(result))
   .catch(err => res.status(400).json({ message: err.message }))
 }
