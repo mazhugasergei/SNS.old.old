@@ -5,17 +5,16 @@ import cors from 'cors'
 // routers
 import posts_router from './routers/posts.router.js'
 import users_router from './routers/users.router.js'
-import passwords_router from './routers/passwords.router.js'
+import auth_router from './routers/auth.router.js'
 
 const app = express()
-
 app.use(express.json())
 app.use(cors({ origin: process.env.CORS_ORIGIN }))
 
 // routes
-app.use('/api/posts', posts_router)
-app.use('/api/users', users_router)
-app.use('/api/passwords', passwords_router)
+app.use('/posts', posts_router)
+app.use('/users', users_router)
+app.use('', auth_router)
 
 // connect to db
 mongoose.connect(process.env.MONGODB_URI)

@@ -9,18 +9,11 @@ export default () => {
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    // get user's id if there's such a user
-    const user_id = await axios.get(`${process.env.REACT_APP_API}/users/username/${username}`)
-      .then(res => res.data?._id)
-    // if no such a user, display error
-    if(!user_id) setError(true)
-    // check if the password is correct
-    else{
-      const access = await axios.get(`${process.env.REACT_APP_API}/passwords/${user_id}`, { params: { password } })
-        .then(res => res.data.access)
-      if(!access) setError(true)
-      else console.log("access is granted")
-    }
+    await axios.post(`${process.env.REACT_APP_API}/login`, { username, password })
+      .then(res => {
+        if(res.data === 'incorrect credentials') setError(true)
+        else console.log(res.data)
+      })
   }
 
   return (
