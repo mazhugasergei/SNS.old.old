@@ -19,7 +19,7 @@ export default (props: Post) => {
   const [author, setAuthor] = useState<Author | null>(null)
 
   useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_API}/users/id/${props.author_id}`)
+    axios.get(`${process.env.REACT_APP_API}/users/${props.author_id}`)
       .then(res => setAuthor(res.data))
   }, [])
 
