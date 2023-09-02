@@ -8,14 +8,8 @@ export default () => {
   useEffect(()=>{
     const contents =  document.querySelectorAll('.content')
     if(contents) contents.forEach(content => {
-      if(menuOpened){
-        content.addEventListener('click', toggleMenu)
-        content.classList.add('menu-opened')
-      }
-      else{
-        content.removeEventListener('click', toggleMenu)
-        content.classList.remove('menu-opened')
-      }
+      if(menuOpened) content.classList.add('menu-opened')
+      else content.classList.remove('menu-opened')
     })
   }, [menuOpened])
 
