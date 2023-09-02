@@ -35,7 +35,7 @@ body {
   overflow-y: auto;
   position: relative;
   max-height: 100vh;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 .content.menu-opened {
   overflow-y: hidden;
@@ -112,9 +112,6 @@ header .logo {
   font-weight: 700;
   margin-right: auto;
 }
-header .account-btns {
-  display: flex;
-}
 
 .menu-btn {
   cursor: pointer;
@@ -133,7 +130,7 @@ header .account-btns {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 .menu-btn .line {
   width: 100%;
@@ -142,28 +139,32 @@ header .account-btns {
   border-radius: 100vmax;
 }
 .menu-btn .line:nth-child(1) {
-  transition: transform 0.2s, margin 0.2s;
+  transition: width 0.125s, transform 0.125s, margin 0.125s;
   margin-bottom: 0.25rem;
 }
 .menu-btn .line:nth-child(2) {
-  transition: width 0s, transform 0.2s;
+  transition: width 0s, transform 0.125s, margin 0s;
   width: 80%;
+  margin-left: 20%;
 }
 .menu-btn:not(.menu-opened) .line:nth-child(1) {
-  transition-delay: 0s, 0.2s;
+  transition-delay: 0s, 0s, 0.125s;
 }
 .menu-btn:not(.menu-opened) .line:nth-child(2) {
-  transition-delay: 0.2s, 0s;
+  transition-delay: 0.125s, 0s, 0.125s;
+}
+.menu-btn.menu-opened .line {
+  width: 80%;
 }
 .menu-btn.menu-opened .line:nth-child(1) {
   transform: rotate(-45deg);
-  transition-delay: 0.2s, 0s;
+  transition-delay: 0.125s, 0.125s, 0s;
   margin-bottom: -0.125rem;
 }
 .menu-btn.menu-opened .line:nth-child(2) {
-  width: 100%;
-  transition-delay: 0.2s;
-  transform: rotate(45deg);
+  transition-delay: 0.125s;
+  transform: rotate(-135deg);
+  margin: 0;
 }
 
 main.home .posts {
