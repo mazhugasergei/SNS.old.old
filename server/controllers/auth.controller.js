@@ -2,6 +2,13 @@ import User from '../models/User.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
+const is_auth = async (req, res) => {
+  const user = await User.findById(req.user_id)
+  res.json({
+    user_id: req.user_id
+  })
+}
+
 const log_in = async (req, res) => {
   const { username, password } = req.body
   // user
@@ -18,5 +25,5 @@ const log_in = async (req, res) => {
 }
 
 export default {
-  log_in
+  is_auth, log_in
 }

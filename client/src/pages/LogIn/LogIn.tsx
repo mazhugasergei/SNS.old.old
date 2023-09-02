@@ -1,8 +1,11 @@
 import axios from "axios"
 import { FormEvent, useState } from "react"
-import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { RootState } from "store/store"
+import { Link, Navigate } from "react-router-dom"
 
 export default () => {
+  const is_auth = useSelector((state: RootState) => state.user.is_auth)
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<{ status: number, message: string } | null>(null)
@@ -21,6 +24,7 @@ export default () => {
 
   return (
     <main className="log-in_sign-up wrapper" onSubmit={handleFormSubmit}>
+      { is_auth && <Navigate to="/" /> }
       <div className="title">Login</div>
       <form>
         <input className={`${error && error.status === 1 ? "error" : ""}`} type="text" placeholder="Username" value={username} onChange={e => { setUsername(e.target.value); setError(null) }} />

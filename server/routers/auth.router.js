@@ -5,6 +5,6 @@ import verify_token from '../middleware/verify_token.middleware.js'
 const router = express.Router()
 
 router.post('/login', controller.log_in)
-router.get('/is-auth', verify_token, (req, res) => res.send('is authenticated')) // temporar
+router.get('/is-auth', verify_token, controller.is_auth)
 
 export default router

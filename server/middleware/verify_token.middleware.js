@@ -5,7 +5,7 @@ export default (req, res, next) => {
   if(!token){ res.json({ message: "no token" }); return }
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
     if(err){ res.json({ message: err.message }); return }
-    req.userId = decoded.id
+    req.user_id = decoded.user._id
     next()
   })
 }

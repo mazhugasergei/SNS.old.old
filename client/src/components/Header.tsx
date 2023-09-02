@@ -1,21 +1,24 @@
-import axios from "axios"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { RootState } from "store/store"
 
 export default () => {
+  const is_auth = useSelector((state: RootState) => state.user.is_auth)
+
   return (
     <header className="wrapper">
       <Link to="/" className="logo">Moments</Link>
       <div className="account-btns">
-        <button className="btn outline" onClick={() => {
-          axios.get(`${process.env.REACT_APP_API}/is-auth`, {
-            headers: {
-              "x-access-token": localStorage.getItem('x-access-token')
-            }
-          })
-            .then(res => console.log(res.data))
-        }}>is auth?</button>
-        <Link to="/log-in" className="btn transparent">Log in</Link>
-        {/* <Link to="/sign-up" className="btn">Sign up</Link> */}
+        { is_auth ?
+            <>
+              <Link to="/profile" className="btn outline">Profile</Link>
+            </>
+          :
+            <>
+              <Link to="/log-in" className="btn transparent">Log in</Link>
+              <Link to="/sign-up" className="btn">Sign up</Link>
+            </>
+        }
       </div>
     </header>
   )
