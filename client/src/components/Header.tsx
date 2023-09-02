@@ -8,18 +8,18 @@ export default () => {
   return (
     <header className="wrapper">
       <Link to="/" className="logo">Moments</Link>
-      <div className="account-btns">
+      {/* <div className="account-btns">
         { is_auth ?
             <>
               <Link to="/profile" className="btn outline">Profile</Link>
             </>
           :
             <>
-              <Link to="/log-in" className="btn transparent">Log in</Link>
-              <Link to="/sign-up" className="btn">Sign up</Link>
+              <Link to="/log-in" className="btn transparent">Login</Link>
+              <Link to="/sign-up" className="btn outline">Sign up</Link>
             </>
         }
-      </div>
+      </div> */}
     </header>
   )
 }

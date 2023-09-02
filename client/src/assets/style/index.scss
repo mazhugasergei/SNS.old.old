@@ -4,12 +4,14 @@
   margin: 0;
 }
 
+@import './ui/animations';
 @import './ui/colors';
 @import './ui/typography';
 @import './ui/layout';
 @import './ui/buttons';
 @import './ui/inputs';
 @import './components/header';
+@import './components/menu';
 @import './pages/home/home';
 @import './pages/home/components/post';
 @import './pages/log-in_sign-up/log-in_sign-up';
