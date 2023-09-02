@@ -1,10 +1,12 @@
 import axios from "axios"
 import { FormEvent, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { Link, Navigate } from "react-router-dom"
+import { setUser } from "store/slices/userSlice"
 
 export default () => {
+  const dispatch = useDispatch()
   const is_auth = useSelector((state: RootState) => state.user.is_auth)
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -18,7 +20,10 @@ export default () => {
           status: res.data.status,
           message: res.data.message
         })
-        else localStorage.setItem('x-access-token', res.data.token)
+        else{
+          localStorage.setItem('x-access-token', res.data.token)
+          dispatch(setUser({ _id: res.data._id }))
+        }
       })
   }
 

@@ -1,6 +1,13 @@
+import { useSelector } from "react-redux"
+import { Navigate } from "react-router-dom"
+import { RootState } from "store/store"
+
 export default () => {
+  const is_auth = useSelector((state: RootState) => state.user.is_auth)
+  
   return (
     <main className="log-in_sign-up wrapper">
+      { is_auth && <Navigate to="/" /> }
       <div className="title">Create your account</div>
       <form>
         <input type="text" placeholder="Username" />

@@ -17,7 +17,7 @@ export default () => {
     }
   })
     .then(res => {
-      if(res) dispatch(setUser({ user_id: res.data.user_id }))
+      if(res) dispatch(setUser({ _id: res.data.user_id }))
     })
 
   return (
