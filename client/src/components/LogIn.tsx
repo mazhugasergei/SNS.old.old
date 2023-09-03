@@ -2,17 +2,17 @@ import axios from "axios"
 import { FormEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
-import { Link, Navigate } from "react-router-dom"
 import { setUser } from "store/slices/userSlice"
+import { toggleSignUp } from "store/slices/menuSlice"
 
 export default () => {
   const dispatch = useDispatch()
-  const is_auth = useSelector((state: RootState) => state.user.is_auth)
+  const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<{ status: number, message: string } | null>(null)
 
-  const handleFormSubmit = async (e: FormEvent) => {
+  const handleLogIn = async (e: FormEvent) => {
     e.preventDefault()
     await axios.post(`${process.env.REACT_APP_API}/login`, { username, password })
       .then(res => {
@@ -28,16 +28,15 @@ export default () => {
   }
 
   return (
-    <main className="log-in_sign-up wrapper" onSubmit={handleFormSubmit}>
-      { is_auth && <Navigate to="/" /> }
-      <div className="title">Login</div>
-      <form>
+    <div className={`auth ${logging_in ? 'shown' : ''}`}>
+      <div className="title">Welcome back!</div>
+      <form onSubmit={handleLogIn}>
         <input className={`${error && error.status === 1 ? "error" : ""}`} type="text" placeholder="Username" value={username} onChange={e => { setUsername(e.target.value); setError(null) }} />
         <input className={`${error && error.status === 2 ? "error" : ""}`} type="password" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value); setError(null) }} />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
-        <button className="btn">Log In</button>
+        <button className="btn">Log in</button>
       </form>
-      <div className="sing-up-link">Don't have an account? <Link to="/sign-up">Sign up</Link></div>
-    </main>
+      <div className="bottom-link">Don't have an account? <span className="link" onClick={() => dispatch(toggleSignUp())}>Sign up</span></div>
+    </div>
   )
 }

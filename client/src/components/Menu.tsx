@@ -1,18 +1,26 @@
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
-import { toggleOpened } from "store/slices/menuSlice"
+import { toggleOpened, toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
+import LogIn from "components/LogIn"
+import SignUp from "components/SignUp"
 
 export default () => {
   const dispatch = useDispatch()
   const is_auth = useSelector((state: RootState) => state.user.is_auth)
+  const logging_in = useSelector((state: RootState) => state.menu.logging_in)
+  const signing_up = useSelector((state: RootState) => state.menu.signing_up)
 
   const toggleMenu = () => dispatch(toggleOpened())
 
   return (
     <menu>
       <div className="title">Menu</div>
-      <nav>
+      
+      <LogIn />
+      <SignUp />
+      
+      <nav className={`navigation ${(logging_in || signing_up) ? 'logging-in' : ''}`}>
         <ul>
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Home</Link></li>
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>About</Link></li>
@@ -25,8 +33,8 @@ export default () => {
             </>
             :
             <>
-              <Link to="/log-in" className="btn transparent" onClick={toggleMenu}>Login</Link>
-              <Link to="/sign-up" className="btn" onClick={toggleMenu}>Sign up</Link>
+              <button className="btn transparent" onClick={() => dispatch(toggleLogIn())}>Log in</button>
+              <button className="btn" onClick={() => dispatch(toggleSignUp())}>Sign up</button>
             </>
           }
         </div>

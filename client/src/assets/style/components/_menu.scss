@@ -2,7 +2,6 @@ menu{
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: #fff;
   padding: 0 var(--wrapper-padding-inline);
 
   .title{
@@ -21,16 +20,18 @@ menu{
     flex-flow: column;
     justify-content: space-between;
     gap: .5rem;
+    transition: $transition;
     padding-block: 7rem 3rem;
+    &.logging-in{
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(10%);
+    }
     a{
+      text-align: left !important;
       display: block;
       width: 100%;
-    }
-    ul{
-      a{
-        text-align: left !important;
-        padding-inline: 0 !important;
-      }
+      padding-inline: 0 !important;
     }
     .account-btns{
       display: flex;

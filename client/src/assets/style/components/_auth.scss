@@ -1,0 +1,50 @@
+.auth{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--wrapper-padding-inline);
+  right: 17%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  transition: $transition;
+
+  &:not(.shown){
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-10%);
+  }
+
+  .title{
+    font-size: 2rem;
+    font-weight: 700;
+    padding-bottom: 2rem;
+  }
+
+  form{
+    display: grid;
+    gap: 1rem;
+
+    .error-message{
+      &.hidden{ display: none; }
+      color: $error;
+      font-size: .9rem;
+    }
+
+    button{
+      font-size: 1rem;
+      border-radius: 100vmax;
+      padding: 1.25rem 1.5rem;
+    }
+  }
+
+  .bottom-link{
+    text-align: center;
+    padding-block: 1rem;
+    .link{
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+}

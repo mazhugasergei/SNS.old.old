@@ -28,6 +28,10 @@ body{
     border-radius: 2rem;
     &:not(.bg-card){ border: $border; }
   }
+  &.hidden{
+    transform: scale(.7) translateX(114%);
+  }
+
   &.bg-card{
     position: fixed;
     top: 0;
@@ -37,6 +41,9 @@ body{
     &.menu-opened{
       background: rgb(#2c2c2f, .03);
       transform: scale(.63) translateX(64%);
+    }
+    &.hidden{
+      transform: scale(.63) translateX(114%);
     }
   }
 }
