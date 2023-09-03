@@ -1,5 +1,5 @@
 :root{
-  --wrapper-padding-inline: 1.5rem;
+  --wrapper-padding-inline: 1.8rem;
 }
 
 .wrapper{
@@ -7,14 +7,14 @@
 }
 
 body{
-  background: #fff;
   overflow-y: hidden;
 }
 
 .content{
   overflow-y: auto;
   position: relative;
-  max-height: 100vh;
+  z-index: 2;
+  height: 100vh;
   transition: $transition;
   &.menu-opened{
     *{ pointer-events: none; }
@@ -26,14 +26,13 @@ body{
   &.bg-card{
     position: fixed;
     top: 0;
-    z-index: -1000;
+    z-index: 1;
     width: 100%;
     height: 100%;
     background: transparent;
-    transform: scale(.9);
     &.menu-opened{
       background: rgb(#000, .04);
-      transform: scale(.6) translateX(65%);
+      transform: scale(.63) translateX(64%);
     }
   }
 }
