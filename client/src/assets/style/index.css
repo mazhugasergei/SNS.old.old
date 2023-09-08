@@ -135,7 +135,13 @@ menu {
   position: absolute;
   z-index: 1;
   inset: 0;
+  transition: 0.25s;
   padding: 0 var(--wrapper-padding-inline);
+}
+menu:not(.menu-opened) {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-10%);
 }
 menu .title {
   position: relative;

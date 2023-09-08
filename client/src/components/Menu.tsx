@@ -7,6 +7,7 @@ import SignUp from "components/SignUp"
 
 export default () => {
   const dispatch = useDispatch()
+  const menu_opened = useSelector((state: RootState) => state.menu.opened)
   const is_auth = useSelector((state: RootState) => state.user.is_auth)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
@@ -14,7 +15,7 @@ export default () => {
   const toggleMenu = () => dispatch(toggleOpened())
 
   return (
-    <menu>
+    <menu className={menu_opened ? 'menu-opened' : ''}>
       <div className="title">Menu</div>
       
       <LogIn />
