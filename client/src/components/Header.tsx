@@ -1,9 +1,14 @@
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { RootState } from "store/store"
 
 export default () => {
-  const is_auth = useSelector((state: RootState) => state.user.is_auth)
+  useEffect(()=>{
+    const content = document.querySelector<HTMLDivElement>('.content')
+    const header = document.querySelector('header')
+    content?.addEventListener('scroll', ()=>{
+      if(header) content.scrollTop ? header.classList.add('content-scrolled') : header.classList.remove('content-scrolled')
+    })
+  }, [])
 
   return (
     <header className="wrapper">

@@ -8,7 +8,7 @@ menu {
   background: #fff;
 }
 
-.content {
+header, .content {
   background: #FBFCFD;
 }
 
@@ -49,6 +49,7 @@ body {
   z-index: 2;
   height: var(--100dvh, 100vh);
   transition: 0.25s, height 0s;
+  padding-block: 4.53125rem;
 }
 .content.menu-opened {
   overflow-y: hidden;
@@ -121,9 +122,20 @@ input[type=text].error, input[type=password].error {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   align-items: center;
+  border-bottom: 0.0625rem solid #e7e8ec;
+  transition: 0.25s;
   padding-block: 1.5rem;
+}
+header:not(.content-scrolled) {
+  border-bottom-color: transparent;
+}
+header.content-scrolled {
+  border-bottom: 0.0625rem solid #e7e8ec;
 }
 header .logo {
   font-size: 1.25rem;
@@ -181,7 +193,7 @@ menu nav .account-btns {
 .menu-btn {
   cursor: pointer;
   position: fixed;
-  top: 2.234375rem;
+  top: 2.265625rem;
   right: var(--wrapper-padding-inline);
   transform: translateY(-50%);
   z-index: 1000;
@@ -191,6 +203,7 @@ menu nav .account-btns {
   margin-right: -0.75rem;
 }
 .menu-btn .lines-cont {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -213,6 +226,12 @@ menu nav .account-btns {
   width: 80%;
   margin-left: 20%;
 }
+.menu-btn .line:nth-child(3) {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0s, width 0s, transform 0.125s;
+  transition-delay: 0.125s, 0.125s, 0.125s;
+}
 .menu-btn:not(.menu-opened) .line:nth-child(1) {
   transition-delay: 0s, 0s, 0.125s;
 }
@@ -231,6 +250,23 @@ menu nav .account-btns {
   transition-delay: 0.125s;
   transform: rotate(-135deg);
   margin: 0;
+}
+.menu-btn.back .line:nth-child(1) {
+  transition: width 0.125s, transform 0.125s;
+  transition-delay: 0s, 0.125s;
+  transform: rotate(0deg);
+}
+.menu-btn.back .line:nth-child(2) {
+  width: 40%;
+  transition: width 0s, transform 0.125s;
+  transition-delay: 0.1515151515s, 0.125s;
+  transform: translate(-0.37rem, -0.2rem) rotate(-225deg);
+}
+.menu-btn.back .line:nth-child(3) {
+  opacity: 1;
+  width: 40%;
+  transition-delay: 0.1515151515s, 0.125s, 0.125s;
+  transform: translate(-0.37rem, 0.17rem) rotate(45deg);
 }
 
 .auth {

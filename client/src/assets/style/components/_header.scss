@@ -1,7 +1,18 @@
 header{
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   align-items: center;
+  border-bottom: $border;
+  transition: $transition;
   padding-block: 1.5rem;
+  &:not(.content-scrolled){
+    border-bottom-color: transparent;
+  }
+  &.content-scrolled{
+    border-bottom: $border;
+  }
 
   .logo{
     font-size: 1.25rem;

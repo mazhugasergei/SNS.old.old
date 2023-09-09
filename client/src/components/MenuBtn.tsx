@@ -12,8 +12,9 @@ export default () => {
   const toggleMenuAuth = () => dispatch(logging_in ? toggleLogIn() : signing_up ? toggleSignUp() : toggleOpened())
 
   return (
-    <button className={`menu-btn ${menu_opened ? "menu-opened" : ""}`} onClick={(logging_in || signing_up) ? toggleMenuAuth : toggleMenu}>
+    <button className={`menu-btn ${menu_opened ? "menu-opened" : ""} ${(logging_in || signing_up) ? "back" : ""}`} onClick={(logging_in || signing_up) ? toggleMenuAuth : toggleMenu}>
       <div className="lines-cont">
+        <div className="line" />
         <div className="line" />
         <div className="line" />
       </div>
