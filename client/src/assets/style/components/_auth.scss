@@ -25,6 +25,13 @@
     display: grid;
     gap: 1rem;
 
+    input{
+      background: lighten($primary, 5);
+      color: #fff;
+      border: none;
+      &::placeholder{ color: #fff; }
+    }
+
     .error-message{
       &.hidden{ display: none; }
       color: $error;

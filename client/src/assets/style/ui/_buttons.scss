@@ -10,9 +10,12 @@ button{
   font-size: .96rem;
   font-weight: 500;
   padding: 1rem 1.75rem;
-  &:not(.outline, .transparent){
+  &:not(.outline, .transparent, .white){
     background: $primary;
     color: #fff;
+  }
+  &.white{
+    background: #fff;
   }
   &.outline{
     border: $border;

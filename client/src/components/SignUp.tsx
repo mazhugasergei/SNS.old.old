@@ -23,7 +23,7 @@ export default () => {
         <input type="text" placeholder="Username" />
         <input type="password" placeholder="Password" />
         <input type="password" placeholder="Repeat password" />
-        <button className="btn">Sign up</button>
+        <button className="btn white">Sign up</button>
       </form>
       <div className="bottom-link">Have an account? <span className="link" onClick={() => dispatch(toggleLogIn())}>Log in</span></div>
     </div>

@@ -4,8 +4,8 @@
   margin: 0;
 }
 
-menu {
-  background: #fff;
+body {
+  background: #273138;
 }
 
 header, .content {
@@ -59,9 +59,6 @@ body {
 .content.menu-opened * {
   pointer-events: none;
 }
-.content.menu-opened:not(.bg-card) {
-  border: 0.0625rem solid #e7e8ec;
-}
 .content.hidden {
   transform: scale(0.7) translateX(114%);
 }
@@ -73,7 +70,7 @@ body {
   background: transparent;
 }
 .content.bg-card.menu-opened {
-  background: rgba(44, 44, 47, 0.03);
+  background: #3c4b56;
   transform: scale(0.63) translateX(64%);
 }
 .content.bg-card.hidden {
@@ -93,9 +90,12 @@ button {
   font-weight: 500;
   padding: 1rem 1.75rem;
 }
-.btn:not(.outline, .transparent) {
+.btn:not(.outline, .transparent, .white) {
   background: #273138;
   color: #fff;
+}
+.btn.white {
+  background: #fff;
 }
 .btn.outline {
   border: 0.0625rem solid #e7e8ec;
@@ -147,6 +147,7 @@ menu {
   position: absolute;
   z-index: 1;
   inset: 0;
+  color: #fff;
   transition: 0.25s;
   padding: 0 var(--wrapper-padding-inline);
 }
@@ -182,12 +183,16 @@ menu nav a {
   text-align: left !important;
   display: block;
   width: 100%;
+  color: #fff;
   padding-inline: 0 !important;
 }
 menu nav .account-btns {
   display: flex;
   flex-flow: column;
   gap: 0.5rem;
+}
+menu nav .account-btns button.transparent {
+  color: #fff;
 }
 
 .menu-btn {
@@ -240,6 +245,7 @@ menu nav .account-btns {
 }
 .menu-btn.menu-opened .line {
   width: 80%;
+  background: #fff;
 }
 .menu-btn.menu-opened .line:nth-child(1) {
   transform: rotate(-45deg);
@@ -293,6 +299,17 @@ menu nav .account-btns {
 .auth form {
   display: grid;
   gap: 1rem;
+}
+.auth form input {
+  background: #313e47;
+  color: #fff;
+  border: none;
+}
+.auth form input::-moz-placeholder {
+  color: #fff;
+}
+.auth form input::placeholder {
+  color: #fff;
 }
 .auth form .error-message {
   color: #E95A45;

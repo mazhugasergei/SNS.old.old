@@ -2,6 +2,7 @@ menu{
   position: absolute;
   z-index: 1;
   inset: 0;
+  color: #fff;
   transition: $transition;
   padding: 0 var(--wrapper-padding-inline);
   &:not(.menu-opened){
@@ -37,12 +38,14 @@ menu{
       text-align: left !important;
       display: block;
       width: 100%;
+      color: #fff;
       padding-inline: 0 !important;
     }
     .account-btns{
       display: flex;
       flex-flow: column;
       gap: .5rem;
+      button.transparent{ color: #fff; }
     }
   }
 }

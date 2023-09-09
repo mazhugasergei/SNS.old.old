@@ -27,7 +27,6 @@ body{
     overflow-y: hidden;
     transform: scale(.7) translateX(70%);
     border-radius: 2rem;
-    &:not(.bg-card){ border: $border; }
   }
   &.hidden{
     transform: scale(.7) translateX(114%);
@@ -40,7 +39,7 @@ body{
     width: 100%;
     background: transparent;
     &.menu-opened{
-      background: rgb(#2c2c2f, .03);
+      background: lighten($primary, 10);
       transform: scale(.63) translateX(64%);
     }
     &.hidden{
