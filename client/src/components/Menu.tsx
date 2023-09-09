@@ -26,6 +26,7 @@ export default () => {
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Home</Link></li>
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>About</Link></li>
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Works</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Lorem</Link></li>
         </ul>
         <div className="account-btns">
           { is_auth ?
