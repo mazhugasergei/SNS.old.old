@@ -18,11 +18,11 @@ export default () => {
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
 
   // checl if logged in with valid token
-  axios.get(`${process.env.REACT_APP_API}/is-auth`, { headers:{ "x-access-token": localStorage.getItem('x-access-token') } })
+  axios.get(`${process.env.REACT_APP_API}/auth/is-auth`, { headers:{ "x-access-token": localStorage.getItem('x-access-token') } })
     .then(res => { if(res) dispatch(setUser({ _id: res.data.user_id })) })
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/SNS">
       <Menu />
       <MenuBtn />
       <div className={`content ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up) ? 'hidden' : ''}`}>

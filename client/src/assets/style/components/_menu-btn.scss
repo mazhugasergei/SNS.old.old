@@ -61,24 +61,4 @@
       margin: 0;
     }
   }
-
-  &.back .line{
-    &:nth-child(1){
-      transition: width $transition/2, transform $transition/2;
-      transition-delay: 0s, $transition/2; // width, transform
-      transform: rotate(0deg);
-    }
-    &:nth-child(2){
-      width: 40%;
-      transition: width 0s, transform $transition/2;
-      transition-delay: $transition/1.65, $transition/2; // width, transform
-      transform: translate(-0.37rem, -0.2rem) rotate(-225deg);
-    }
-    &:nth-child(3){
-      opacity: 1;
-      width: 40%;
-      transition-delay: $transition/1.65, $transition/2, $transition/2; // opacity, width, transform
-      transform: translate(-0.37rem, .17rem) rotate(45deg);
-    }
-  }
 }

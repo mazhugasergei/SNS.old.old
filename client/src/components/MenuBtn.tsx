@@ -8,11 +8,13 @@ export default () => {
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
 
-  const toggleMenu = () => dispatch(toggleOpened())
-  const toggleMenuAuth = () => dispatch(logging_in ? toggleLogIn() : signing_up ? toggleSignUp() : toggleOpened())
+  const toggleMenu = () => {
+    (() => logging_in ? dispatch(toggleLogIn()) : signing_up ? dispatch(toggleSignUp()) : null)()
+    dispatch(toggleOpened())
+  }
 
   return (
-    <button className={`menu-btn ${menu_opened ? "menu-opened" : ""} ${(logging_in || signing_up) ? "back" : ""}`} onClick={(logging_in || signing_up) ? toggleMenuAuth : toggleMenu}>
+    <button className={`menu-btn ${menu_opened ? "menu-opened" : ""}`} onClick={toggleMenu}>
       <div className="lines-cont">
         <div className="line" />
         <div className="line" />
