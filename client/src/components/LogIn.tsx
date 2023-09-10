@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { setUser } from "store/slices/userSlice"
-import { toggleSignUp } from "store/slices/menuSlice"
+import { toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
 
 export default () => {
   const dispatch = useDispatch()
@@ -14,15 +14,22 @@ export default () => {
 
   const handleLogIn = async (e: FormEvent) => {
     e.preventDefault()
-    await axios.post(`${process.env.REACT_APP_API}/login`, { username, password })
+    await axios.post(`${process.env.REACT_APP_API}/auth/login`, { username, password })
       .then(res => {
         if(res.data.status) setError({
           status: res.data.status,
           message: res.data.message
         })
         else{
+          // set token
           localStorage.setItem('x-access-token', res.data.token)
+          // set user info
           dispatch(setUser({ _id: res.data._id }))
+          // back to menu
+          dispatch(toggleLogIn())
+          // clear inputs
+          setUsername("")
+          setPassword("")
         }
       })
   }
@@ -36,7 +43,7 @@ export default () => {
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white">Log in</button>
       </form>
-      <div className="bottom-link">Don't have an account? <span className="link" onClick={() => dispatch(toggleSignUp())}>Sign up</span></div>
+      <div className="bottom-link">Don't have an account? <button className="link" onClick={() => dispatch(toggleSignUp())}>Sign up</button></div>
     </div>
   )
 }

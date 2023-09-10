@@ -78,6 +78,7 @@ body {
 }
 
 button {
+  font-size: 1rem;
   background: none;
   border: none;
 }
@@ -113,12 +114,8 @@ input[type=text]::-moz-placeholder, input[type=password]::-moz-placeholder {
 input[type=text]::placeholder, input[type=password]::placeholder {
   color: #aaa;
 }
-input[type=text]:focus-visible, input[type=password]:focus-visible {
-  outline: auto !important;
-}
 input[type=text].error, input[type=password].error {
-  outline: auto;
-  outline-color: #E95A45 !important;
+  border-color: #E95A45 !important;
 }
 
 header {
@@ -158,20 +155,20 @@ menu.hidden {
 }
 menu .title {
   position: relative;
-  z-index: 1000;
   top: 2.234375rem;
   transform: translateY(-50%);
-  font-weight: 700;
 }
-menu .title span {
+menu .title button {
+  color: #fff;
+  font-weight: 700;
   transition: 0.25s;
 }
-menu .title span.hidden {
+menu .title button.hidden {
   opacity: 0;
   visibility: hidden;
   transform: translateX(1rem);
 }
-menu .title span.auth-title {
+menu .title button.auth-title {
   cursor: pointer;
   position: absolute;
   display: flex;
@@ -180,10 +177,10 @@ menu .title span.auth-title {
   padding: 0.75rem;
   margin: -0.75rem;
 }
-menu .title span.auth-title.hidden {
+menu .title button.auth-title.hidden {
   transform: translateX(-1rem);
 }
-menu .title span.auth-title svg {
+menu .title button.auth-title svg {
   stroke-width: 0.16rem;
 }
 menu nav {
@@ -284,8 +281,8 @@ menu nav .account-btns button.transparent {
 
 .auth {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
+  transform: translate(0, -50%);
   left: var(--wrapper-padding-inline);
   right: 17%;
   display: flex;
@@ -296,7 +293,7 @@ menu nav .account-btns button.transparent {
 .auth:not(.shown) {
   visibility: hidden;
   opacity: 0;
-  transform: translateX(-10%);
+  transform: translate(-10%, -50%);
 }
 .auth .title {
   font-size: 2rem;
@@ -310,7 +307,7 @@ menu nav .account-btns button.transparent {
 .auth form input {
   background: #242424;
   color: #fff;
-  border: none;
+  border-color: transparent;
 }
 .auth form input::-moz-placeholder {
   color: #fff;
@@ -336,6 +333,7 @@ menu nav .account-btns button.transparent {
 }
 .auth .bottom-link .link {
   cursor: pointer;
+  color: #fff;
   font-weight: 600;
   text-decoration: underline;
 }

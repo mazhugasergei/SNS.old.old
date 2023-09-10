@@ -1,7 +1,7 @@
 .auth{
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
+  transform: translate(0, -50%);
   left: var(--wrapper-padding-inline);
   right: 17%;
   display: flex;
@@ -12,7 +12,7 @@
   &:not(.shown){
     visibility: hidden;
     opacity: 0;
-    transform: translateX(-10%);
+    transform: translate(-10%, -50%);
   }
 
   .title{
@@ -28,7 +28,7 @@
     input{
       background: lighten($primary, 5);
       color: #fff;
-      border: none;
+      border-color: transparent;
       &::placeholder{ color: #fff; }
     }
 
@@ -50,6 +50,7 @@
     padding-block: 1rem;
     .link{
       cursor: pointer;
+      color: #fff;
       font-weight: 600;
       text-decoration: underline;
     }

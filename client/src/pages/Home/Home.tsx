@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 // components
 import Post from "pages/Home/compoentns/Post"
 
-interface Post {
+interface PostType {
   _id: string,
   author_id: string,
   title: string,
@@ -12,7 +12,7 @@ interface Post {
 }
 
 export default () => {
-  const [posts, setPosts] = useState<Post[] | null>(null)
+  const [posts, setPosts] = useState<PostType[] | null>(null)
 
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_API}/posts`)

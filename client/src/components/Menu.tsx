@@ -21,9 +21,9 @@ export default () => {
     <menu className={menu_opened ? "" : "hidden"}>
       {/* menu title */}
       <div className="title">
-        <span className={`auth-title ${logging_in ? "" : "hidden"}`} onClick={toggleLoggingIn}><FiArrowLeft /> Log in</span>
-        <span className={`auth-title ${signing_up ? "" : "hidden"}`} onClick={toggleSigningUp}><FiArrowLeft /> Sign up</span>
-        <span className={`menu-title ${(logging_in || signing_up) ? "hidden" : ""}`}>Menu</span>
+        <button className={`auth-title ${logging_in ? "" : "hidden"}`} onClick={toggleLoggingIn}><FiArrowLeft /> Log in</button>
+        <button className={`auth-title ${signing_up ? "" : "hidden"}`} onClick={toggleSigningUp}><FiArrowLeft /> Sign up</button>
+        <button className={`menu-title ${(logging_in || signing_up) ? "hidden" : ""}`}>Menu</button>
       </div>
       
       {/* auth forms */}
