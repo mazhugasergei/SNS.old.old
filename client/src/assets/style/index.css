@@ -31,16 +31,20 @@ ul, nav {
   --wrapper-padding-inline: 1.8rem;
 }
 
-.wrapper {
-  padding-inline: var(--wrapper-padding-inline);
-}
-
 html {
   overflow: hidden;
 }
 
 body {
   overflow: hidden;
+}
+
+.wrapper {
+  padding-inline: var(--wrapper-padding-inline);
+}
+
+svg {
+  display: block;
 }
 
 .content {
@@ -62,6 +66,7 @@ body {
 .content.hidden {
   transform: scale(0.7) translateX(114%);
 }
+
 .content.bg-card {
   position: fixed;
   top: 0;
@@ -200,7 +205,7 @@ menu nav.logging-in {
   opacity: 0;
   transform: translateX(10%);
 }
-menu nav a {
+menu nav ul a {
   text-align: left !important;
   display: block;
   width: 100%;
@@ -214,6 +219,16 @@ menu nav .account-btns {
 }
 menu nav .account-btns button.transparent {
   color: #fff;
+}
+menu nav .account-btns .btn.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  background: #1f1f1f;
+}
+menu nav .account-btns .btn.profile svg {
+  flex-shrink: 0;
 }
 
 .menu-btn {
@@ -310,10 +325,10 @@ menu nav .account-btns button.transparent {
   border-color: transparent;
 }
 .auth form input::-moz-placeholder {
-  color: #fff;
+  color: #707070;
 }
 .auth form input::placeholder {
-  color: #fff;
+  color: #707070;
 }
 .auth form .error-message {
   color: #E95A45;

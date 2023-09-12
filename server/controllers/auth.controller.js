@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const is_auth = async (req, res) => {
-  res.json({ user_id: req.user_id })
+  res.json({ _id: req._id, display_name: req.display_name })
 }
 
 const log_in = async (req, res) => {
@@ -18,7 +18,7 @@ const log_in = async (req, res) => {
   if(!isValid){ res.json({ status: 2, message: "Incorrect password" }); return }
   // token
   const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '5m' })
-  res.json({ _id: user._id, token })
+  res.json({ _id: user._id, display_name: user.display_name, token })
 }
 
 export default {

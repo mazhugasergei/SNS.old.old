@@ -3,17 +3,12 @@
   --wrapper-padding-inline: 1.8rem;
 }
 
-.wrapper{
-  padding-inline: var(--wrapper-padding-inline);
-}
+html{ overflow: hidden; }
+body{ overflow: hidden; }
 
-html{
-  overflow: hidden;
-}
+.wrapper{ padding-inline: var(--wrapper-padding-inline); }
 
-body{
-  overflow: hidden;
-}
+svg{ display: block; }
 
 .content{
   overflow-y: auto;
@@ -28,22 +23,17 @@ body{
     transform: scale(.7) translateX(70%);
     border-radius: 2rem;
   }
-  &.hidden{
-    transform: scale(.7) translateX(114%);
+  &.hidden{ transform: scale(.7) translateX(114%); }
+}
+.content.bg-card{
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background: transparent;
+  &.menu-opened{
+    background: lighten($primary, 10);
+    transform: scale(.63) translateX(64%);
   }
-
-  &.bg-card{
-    position: fixed;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    background: transparent;
-    &.menu-opened{
-      background: lighten($primary, 10);
-      transform: scale(.63) translateX(64%);
-    }
-    &.hidden{
-      transform: scale(.63) translateX(114%);
-    }
-  }
+  &.hidden{ transform: scale(.63) translateX(114%); }
 }

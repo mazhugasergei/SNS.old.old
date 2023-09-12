@@ -21,7 +21,8 @@ export default () => {
   axios.get(`${process.env.REACT_APP_API}/auth/is-auth`, {
     headers:{ "x-access-token": localStorage.getItem('x-access-token') }
   })
-    .then(res => { if(res) dispatch(setUser({ _id: res.data.user_id })) })
+    .then(res => res.data)
+    .then(data => { dispatch(setUser({ _id: data._id, display_name: data.display_name })) })
 
   return (
     <BrowserRouter basename="/SNS">

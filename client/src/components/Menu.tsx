@@ -2,14 +2,18 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { toggleOpened, toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
+// components
 import LogIn from "components/LogIn"
 import SignUp from "components/SignUp"
+// icons
 import { FiArrowLeft } from "react-icons/fi"
+import { BiUser } from "react-icons/bi"
 
 export default () => {
   const dispatch = useDispatch()
   const menu_opened = useSelector((state: RootState) => state.menu.opened)
   const is_auth = useSelector((state: RootState) => state.user.is_auth)
+  const display_name = useSelector((state: RootState) => state.user.display_name)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
 
@@ -40,7 +44,9 @@ export default () => {
         </ul>
         <div className="account-btns">
           { is_auth ?
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile" className="btn profile">
+              <BiUser /><span>{ display_name }</span>
+            </Link>
             :
             <>
               <button className="btn transparent" onClick={() => dispatch(toggleLogIn())}>Log in</button>

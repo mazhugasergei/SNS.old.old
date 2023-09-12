@@ -15,16 +15,17 @@ export default () => {
   const handleLogIn = async (e: FormEvent) => {
     e.preventDefault()
     await axios.post(`${process.env.REACT_APP_API}/auth/login`, { username, password })
-      .then(res => {
-        if(res.data.status) setError({
-          status: res.data.status,
-          message: res.data.message
+      .then(res => res.data)
+      .then(data => {
+        if(data.status) setError({
+          status: data.status,
+          message: data.message
         })
         else{
           // set token
-          localStorage.setItem('x-access-token', res.data.token)
+          localStorage.setItem('x-access-token', data.token)
           // set user info
-          dispatch(setUser({ _id: res.data._id }))
+          dispatch(setUser({ _id: data._id, display_name: data.display_name }))
           // back to menu
           dispatch(toggleLogIn())
           // clear inputs
