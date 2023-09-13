@@ -158,22 +158,22 @@ menu.hidden {
   opacity: 0;
   transform: translateX(-10%);
 }
-menu .title {
+menu > .title {
   position: relative;
   top: 2.234375rem;
   transform: translateY(-50%);
 }
-menu .title button {
+menu > .title button {
   color: #fff;
   font-weight: 700;
   transition: 0.25s;
 }
-menu .title button.hidden {
+menu > .title button.hidden {
   opacity: 0;
   visibility: hidden;
   transform: translateX(1rem);
 }
-menu .title button.auth-title {
+menu > .title button.auth-title {
   cursor: pointer;
   position: absolute;
   display: flex;
@@ -182,10 +182,10 @@ menu .title button.auth-title {
   padding: 0.75rem;
   margin: -0.75rem;
 }
-menu .title button.auth-title.hidden {
+menu > .title button.auth-title.hidden {
   transform: translateX(-1rem);
 }
-menu .title button.auth-title svg {
+menu > .title button.auth-title svg {
   stroke-width: 0.16rem;
 }
 menu nav {
@@ -302,7 +302,6 @@ menu nav .account-btns .btn.profile svg {
   right: 17%;
   display: flex;
   flex-flow: column;
-  justify-content: center;
   transition: 0.25s;
 }
 .auth:not(.shown) {
@@ -310,24 +309,24 @@ menu nav .account-btns .btn.profile svg {
   opacity: 0;
   transform: translate(-10%, -50%);
 }
-.auth .title {
+.auth > .title {
   font-size: 2rem;
   font-weight: 700;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 .auth form {
   display: grid;
   gap: 1rem;
 }
-.auth form input {
+.auth form .user-input {
   background: #242424;
   color: #fff;
   border-color: transparent;
 }
-.auth form input::-moz-placeholder {
+.auth form .user-input::-moz-placeholder {
   color: #707070;
 }
-.auth form input::placeholder {
+.auth form .user-input::placeholder {
   color: #707070;
 }
 .auth form .error-message {
@@ -337,7 +336,7 @@ menu nav .account-btns .btn.profile svg {
 .auth form .error-message.hidden {
   display: none;
 }
-.auth form button {
+.auth form .btn.submit {
   font-size: 1rem;
   border-radius: 100vmax;
   padding: 1.25rem 1.5rem;

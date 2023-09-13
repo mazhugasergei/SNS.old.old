@@ -18,14 +18,14 @@ export default () => {
 
   return (
     <div className={`auth ${signing_up ? 'shown' : ''}`}>
-      <div className="title">Create your account</div>
+      <div className="title">﹏<br/>Create your account</div>
       <form onSubmit={handleSignUp}>
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Repeat password" />
+        <input className={`user-input`} type="text" placeholder="Username" />
+        <input className={`user-input`} type="password" placeholder="Password" />
+        <input className={`user-input`} type="password" placeholder="Repeat password" />
         <button className="btn white">Sign up</button>
       </form>
-      <div className="bottom-link">Have an account? <span className="link" onClick={() => dispatch(toggleLogIn())}>Log in</span></div>
+      <div className="bottom-link">Have an account? <button className="link" onClick={() => dispatch(toggleLogIn())}>Log in</button></div>
     </div>
   )
 }

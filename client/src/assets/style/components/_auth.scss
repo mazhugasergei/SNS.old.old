@@ -6,39 +6,37 @@
   right: 17%;
   display: flex;
   flex-flow: column;
-  justify-content: center;
   transition: $transition;
-
   &:not(.shown){
     visibility: hidden;
     opacity: 0;
     transform: translate(-10%, -50%);
   }
 
-  .title{
+  & > .title{
     font-size: 2rem;
     font-weight: 700;
-    padding-bottom: 2rem;
+    margin-bottom: 2rem;
   }
 
   form{
     display: grid;
     gap: 1rem;
 
-    input{
+    .user-input{
       background: lighten($primary, 5);
       color: #fff;
       border-color: transparent;
       &::placeholder{ color: lighten($primary, 35); }
     }
-
+    
     .error-message{
       &.hidden{ display: none; }
       color: $error;
       font-size: .9rem;
     }
-
-    button{
+  
+    .btn.submit{
       font-size: 1rem;
       border-radius: 100vmax;
       padding: 1.25rem 1.5rem;

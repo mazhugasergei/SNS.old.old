@@ -38,9 +38,9 @@ export default () => {
       <nav className={`navigation ${(logging_in || signing_up) ? "logging-in" : ""}`}>
         <ul>
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Home</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={toggleMenu}>About</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Works</Link></li>
           <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Lorem</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Ipsum</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={toggleMenu}>Dolor</Link></li>
         </ul>
         <div className="account-btns">
           { is_auth ?

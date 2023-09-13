@@ -37,12 +37,12 @@ export default () => {
 
   return (
     <div className={`auth ${logging_in ? 'shown' : ''}`}>
-      <div className="title">Welcome back!</div>
+      <div className="title">﹏<br/>Welcome back!</div>
       <form onSubmit={handleLogIn}>
-        <input className={`${error && error.status === 1 ? "error" : ""}`} type="text" placeholder="Username" value={username} onChange={e => { setUsername(e.target.value); setError(null) }} />
-        <input className={`${error && error.status === 2 ? "error" : ""}`} type="password" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value); setError(null) }} />
+        <input className={`user-input ${error && error.status === 1 ? "error" : ""}`} type="text" placeholder="Username" value={username} onChange={e => { setUsername(e.target.value); setError(null) }} />
+        <input className={`user-input ${error && error.status === 2 ? "error" : ""}`} type="password" placeholder="Password" value={password} onChange={e => { setPassword(e.target.value); setError(null) }} />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
-        <button className="btn white">Log in</button>
+        <button className="btn white submit">Log in</button>
       </form>
       <div className="bottom-link">Don't have an account? <button className="link" onClick={() => dispatch(toggleSignUp())}>Sign up</button></div>
     </div>
