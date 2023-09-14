@@ -220,15 +220,35 @@ menu nav .account-btns {
 menu nav .account-btns button.transparent {
   color: #fff;
 }
-menu nav .account-btns .btn.profile {
+menu nav .account-btns .profile {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   text-align: left;
-  background: #1f1f1f;
 }
-menu nav .account-btns .btn.profile svg {
-  flex-shrink: 0;
+menu nav .account-btns .profile span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #fff;
+  font-weight: 500;
+}
+menu nav .account-btns .profile .pfp {
+  position: relative;
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+  background: #212121;
+  border-radius: 50%;
+}
+menu nav .account-btns .profile .pfp svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+}
+menu nav .account-btns .profile .pfp svg path {
+  fill: #fff;
 }
 
 .menu-btn {
@@ -338,7 +358,6 @@ menu nav .account-btns .btn.profile svg {
 }
 .auth form .btn.submit {
   font-size: 1rem;
-  border-radius: 100vmax;
   padding: 1.25rem 1.5rem;
 }
 .auth .bottom-link {

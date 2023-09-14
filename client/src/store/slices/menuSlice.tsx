@@ -16,7 +16,7 @@ export const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    toggleOpened: state => { state.opened = !state.opened },
+    toggleMenu: state => { state.opened = !state.opened },
     toggleLogIn: state => {
       state.logging_in = !state.logging_in
       state.signing_up = false
@@ -28,5 +28,5 @@ export const menuSlice = createSlice({
   }
 })
 
-export const { toggleOpened, toggleLogIn, toggleSignUp } = menuSlice.actions
+export const { toggleMenu, toggleLogIn, toggleSignUp } = menuSlice.actions
 export default menuSlice.reducer

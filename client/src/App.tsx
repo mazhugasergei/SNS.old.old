@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from "axios"
 // redux
@@ -17,12 +18,14 @@ export default () => {
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
 
-  // checl if logged in with valid token
-  axios.get(`${process.env.REACT_APP_API}/auth/is-auth`, {
-    headers:{ "x-access-token": localStorage.getItem('x-access-token') }
-  })
-    .then(res => res.data)
-    .then(data => { dispatch(setUser({ _id: data._id, display_name: data.display_name })) })
+  useEffect(()=>{
+    // checl if logged in with valid token
+    axios.get(`${process.env.REACT_APP_API}/auth/is-auth`, {
+      headers:{ "x-access-token": localStorage.getItem('x-access-token') }
+    })
+      .then(res => res.data)
+      .then(data => dispatch(setUser({ _id: data._id, display_name: data.display_name })))
+  }, [])
 
   return (
     <BrowserRouter basename="/SNS">

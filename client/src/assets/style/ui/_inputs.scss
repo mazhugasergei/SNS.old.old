@@ -2,7 +2,7 @@ input{
   &[type=text], &[type=password]{
     font-size: 1rem;
     border: $border;
-    border-radius: .75rem;
+    border-radius: $border-radius;
     padding: 1.25rem;
     &::placeholder{ color: #aaa; }
     &.error{ border-color: $error !important; }

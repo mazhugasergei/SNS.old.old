@@ -1,20 +1,11 @@
-import { useDispatch, useSelector } from "react-redux"
-import { toggleOpened, toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
-import { RootState } from "store/store"
+// hooks
+import useToggleMenu from "hooks/useToggleMenu"
 
 export default () => {
-  const dispatch = useDispatch()
-  const menu_opened = useSelector((state: RootState) => state.menu.opened)
-  const logging_in = useSelector((state: RootState) => state.menu.logging_in)
-  const signing_up = useSelector((state: RootState) => state.menu.signing_up)
-
-  const toggleMenu = () => {
-    (() => logging_in ? dispatch(toggleLogIn()) : signing_up ? dispatch(toggleSignUp()) : null)()
-    dispatch(toggleOpened())
-  }
+  const { menu_opened, handleToggleMenu } = useToggleMenu()
 
   return (
-    <button className={`menu-btn ${menu_opened ? "menu-opened" : ""}`} onClick={toggleMenu}>
+    <button className={`menu-btn ${menu_opened ? "menu-opened" : ""}`} onClick={handleToggleMenu}>
       <div className="lines-cont">
         <div className="line" />
         <div className="line" />

@@ -68,13 +68,33 @@ menu{
       flex-flow: column;
       gap: .5rem;
       button.transparent{ color: #fff; }
-      .btn.profile{
+      .profile{
         display: flex;
         align-items: center;
         gap: .5rem;
         text-align: left;
-        background: lighten($primary, 3);
-        svg{ flex-shrink: 0; }
+        span{
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          color: #fff;
+          font-weight: 500;
+        }
+        .pfp{
+          position: relative;
+          width: 2.5rem;
+          aspect-ratio: 1/1;
+          background: lighten($primary, 4);
+          border-radius: 50%;
+          svg{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem;
+            path{ fill: #fff; }
+          }
+        }
       }
     }
   }
