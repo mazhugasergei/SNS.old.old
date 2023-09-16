@@ -1,10 +1,12 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
 // components
-import LogIn from "components/LogIn"
-import SignUp from "components/SignUp"
+import LogIn from "components/Menu/LogIn"
+import SignUp from "components/Menu/SignUp"
+import ConfirmEmail from "components/Menu/ConfirmEmail"
 // hooks
 import useToggleMenu from "hooks/useToggleMenu"
 // icons
@@ -18,6 +20,10 @@ export default () => {
   const display_name = useSelector((state: RootState) => state.user.display_name)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
+  const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
+  const [email, setEmail] = useState("markuswedler8@gmail.com")
+  const [password, setPassword] = useState("123")
+  const [repeatPassword, setRepeatPassword] = useState("123")
 
   const handleToggleLogIn = () => dispatch(toggleLogIn())
   const handleToggleSignUp = () => dispatch(toggleSignUp())
@@ -28,15 +34,17 @@ export default () => {
       <div className="title">
         <button className={`auth-title ${logging_in ? "" : "hidden"}`} onClick={handleToggleLogIn}><FiArrowLeft /> Log in</button>
         <button className={`auth-title ${signing_up ? "" : "hidden"}`} onClick={handleToggleSignUp}><FiArrowLeft /> Sign up</button>
-        <button className={`menu-title ${(logging_in || signing_up) ? "hidden" : ""}`}>Menu</button>
+        <button className={`auth-title secondary ${confirming_email ? "" : "hidden"}`} onClick={handleToggleSignUp}><FiArrowLeft /> Email code</button>
+        <button className={`menu-title ${(logging_in || signing_up || confirming_email) ? "hidden" : ""}`}>Menu</button>
       </div>
       
       {/* auth forms */}
-      <LogIn />
-      <SignUp />
+      <LogIn {...{email, setEmail, password, setPassword}} />
+      <SignUp {...{email, setEmail, password, setPassword, repeatPassword, setRepeatPassword}} />
+      <ConfirmEmail {...{email, password}} />
       
       {/* menu items */}
-      <nav className={`navigation ${(logging_in || signing_up) ? "logging-in" : ""}`}>
+      <nav className={`navigation ${(logging_in || signing_up || confirming_email) ? "logging-in" : ""}`}>
         <ul>
           <li><Link to="/" className="btn transparent" onClick={handleToggleMenu}>Home</Link></li>
           <li><Link to="/" className="btn transparent" onClick={handleToggleMenu}>Lorem</Link></li>

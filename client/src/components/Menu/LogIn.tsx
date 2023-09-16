@@ -5,16 +5,21 @@ import { RootState } from "store/store"
 import { setUser } from "store/slices/userSlice"
 import { toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
 
-export default () => {
+interface LogInProps {
+  email: string
+  setEmail: (state: string) => void
+  password: string
+  setPassword: (state: string) => void
+}
+
+export default ({email, setEmail, password, setPassword}: LogInProps) => {
   const dispatch = useDispatch()
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
-  const [username, setUsername] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
-  const [error, setError] = useState<{ status: number, message: string } | null>(null) // 1 - wrong username | 2 - wrong password
+  const [error, setError] = useState<{ status: number, message: string } | null>(null) // 1 - wrong email | 2 - wrong password
 
-  const handleLogIn = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    await axios.post(`${process.env.REACT_APP_API}/auth/log-in`, { username, password })
+    await axios.post(`${process.env.REACT_APP_API}/auth/log-in`, { email, password })
       .then(res => res.data)
       .then(data => {
         if(data.status) setError({ status: data.status, message: data.message })
@@ -26,18 +31,18 @@ export default () => {
           // back to menu
           dispatch(toggleLogIn())
           // clear inputs
-          setUsername("")
+          setEmail("")
           setPassword("")
         }
       })
   }
 
   return (
-    <div className={`auth ${logging_in ? 'shown' : ''}`}>
+    <div className={`auth ${logging_in ? '' : 'hidden'}`}>
       <div className="title">﹏<br/>Welcome back!</div>
-      <form onSubmit={handleLogIn}>
-        <input className={`user-input ${error && error.status === 1 ? "error" : ""}`} value={username} onChange={e => { setUsername(e.target.value); setError(null) }} type="text" placeholder="Username" />
-        <input className={`user-input ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" />
+      <form onSubmit={handleSubmit}>
+        <input className={`auth-input ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="text" placeholder="Email / Email" required />
+        <input className={`auth-input ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Log in</button>
       </form>

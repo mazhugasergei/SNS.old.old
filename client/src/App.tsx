@@ -7,7 +7,7 @@ import { setUser } from "store/slices/userSlice"
 import { RootState } from "store/store"
 // components
 import Header from "components/Header"
-import Menu from "components/Menu"
+import Menu from "components/Menu/Menu"
 import MenuBtn from "components/MenuBtn"
 // pages
 import Home from "pages/Home/Home"
@@ -17,6 +17,7 @@ export default () => {
   const menu_opened = useSelector((state: RootState) => state.menu.opened)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
+  const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
 
   useEffect(()=>{
     // checl if logged in with valid token
@@ -31,13 +32,13 @@ export default () => {
     <BrowserRouter basename="/SNS">
       <Menu />
       <MenuBtn />
-      <div className={`content ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up) ? 'hidden' : ''}`}>
+      <div className={`content ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up || confirming_email) ? 'hidden' : ''}`}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
-      <div className={`content bg-card ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up) ? 'hidden' : ''}`} />
+      <div className={`content bg-card ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up || confirming_email) ? 'hidden' : ''}`} />
     </BrowserRouter>
   )
 }

@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.post('/log-in', controller.log_in)
 router.post('/sign-up', controller.sign_up)
+router.post('/verify-code', controller.verify_code)
 router.get('/is-auth', token, controller.is_auth)
 
 export default router

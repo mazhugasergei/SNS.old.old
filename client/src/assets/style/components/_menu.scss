@@ -32,7 +32,10 @@ menu{
         gap: .25rem;
         padding: .75rem;
         margin: -0.75rem;
-        &.hidden{ transform: translateX(-1rem); }
+        &.hidden{
+          transform: translateX(-1rem);
+          &.secondary{ transform: translateX(1rem); }
+        }
         svg{ stroke-width: .16rem; }
       }
     }

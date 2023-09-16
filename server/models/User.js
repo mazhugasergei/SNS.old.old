@@ -1,6 +1,10 @@
 import { Schema, model } from "mongoose"
 
 const UserSchema = new Schema({
+  email: {
+    type: String,
+    required: true
+  },
   username: {
     type: String,
     required: true
@@ -15,4 +19,4 @@ const UserSchema = new Schema({
   }
 }, { timestamps: true })
 
-export default model('User', UserSchema)
+export default model('user', UserSchema)

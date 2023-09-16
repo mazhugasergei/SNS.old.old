@@ -15,4 +15,4 @@ const PostSchema = new Schema({
   }
 }, { timestamps: true })
 
-export default model('Post', PostSchema)
+export default model('post', PostSchema)

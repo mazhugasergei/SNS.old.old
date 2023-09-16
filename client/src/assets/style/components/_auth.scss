@@ -7,23 +7,25 @@
   display: flex;
   flex-flow: column;
   transition: $transition;
-  &:not(.shown){
+  &.hidden{
     visibility: hidden;
     opacity: 0;
     transform: translate(-10%, -50%);
+    &.secondary{ transform: translate(10%, -50%); }
   }
 
   & > .title{
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2rem;
+    svg{ margin-bottom: .75rem; }
   }
 
   form{
     display: grid;
     gap: 1rem;
 
-    .user-input{
+    .auth-input{
       background: lighten($primary, 5);
       color: #fff;
       border-color: transparent;

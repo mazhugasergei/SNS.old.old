@@ -107,19 +107,19 @@ button {
   border: 0.0625rem solid #e7e8ec;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=number], input[type=email], input[type=password] {
   font-size: 1rem;
   border: 0.0625rem solid #e7e8ec;
   border-radius: 0.75rem;
   padding: 1.25rem;
 }
-input[type=text]::-moz-placeholder, input[type=password]::-moz-placeholder {
+input[type=text]::-moz-placeholder, input[type=number]::-moz-placeholder, input[type=email]::-moz-placeholder, input[type=password]::-moz-placeholder {
   color: #aaa;
 }
-input[type=text]::placeholder, input[type=password]::placeholder {
+input[type=text]::placeholder, input[type=number]::placeholder, input[type=email]::placeholder, input[type=password]::placeholder {
   color: #aaa;
 }
-input[type=text].error, input[type=password].error {
+input[type=text].error, input[type=number].error, input[type=email].error, input[type=password].error {
   border-color: #E95A45 !important;
 }
 
@@ -184,6 +184,9 @@ menu > .title button.auth-title {
 }
 menu > .title button.auth-title.hidden {
   transform: translateX(-1rem);
+}
+menu > .title button.auth-title.hidden.secondary {
+  transform: translateX(1rem);
 }
 menu > .title button.auth-title svg {
   stroke-width: 0.16rem;
@@ -324,29 +327,35 @@ menu nav .account-btns .profile .pfp svg path {
   flex-flow: column;
   transition: 0.25s;
 }
-.auth:not(.shown) {
+.auth.hidden {
   visibility: hidden;
   opacity: 0;
   transform: translate(-10%, -50%);
+}
+.auth.hidden.secondary {
+  transform: translate(10%, -50%);
 }
 .auth > .title {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
 }
+.auth > .title svg {
+  margin-bottom: 0.75rem;
+}
 .auth form {
   display: grid;
   gap: 1rem;
 }
-.auth form .user-input {
+.auth form .auth-input {
   background: #242424;
   color: #fff;
   border-color: transparent;
 }
-.auth form .user-input::-moz-placeholder {
+.auth form .auth-input::-moz-placeholder {
   color: #707070;
 }
-.auth form .user-input::placeholder {
+.auth form .auth-input::placeholder {
   color: #707070;
 }
 .auth form .error-message {
