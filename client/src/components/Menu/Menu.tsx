@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
 // components
-import LogIn from "components/Menu/LogIn"
-import SignUp from "components/Menu/SignUp"
-import ConfirmEmail from "components/Menu/ConfirmEmail"
+import Auth from "./Auth/Auth"
 // hooks
 import useToggleMenu from "hooks/useToggleMenu"
 // icons
@@ -21,9 +19,6 @@ export default () => {
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
-  const [email, setEmail] = useState("markuswedler8@gmail.com")
-  const [password, setPassword] = useState("123")
-  const [repeatPassword, setRepeatPassword] = useState("123")
 
   const handleToggleLogIn = () => dispatch(toggleLogIn())
   const handleToggleSignUp = () => dispatch(toggleSignUp())
@@ -39,9 +34,7 @@ export default () => {
       </div>
       
       {/* auth forms */}
-      <LogIn {...{email, setEmail, password, setPassword}} />
-      <SignUp {...{email, setEmail, password, setPassword, repeatPassword, setRepeatPassword}} />
-      <ConfirmEmail {...{email, password}} />
+      <Auth />
       
       {/* menu items */}
       <nav className={`navigation ${(logging_in || signing_up || confirming_email) ? "logging-in" : ""}`}>

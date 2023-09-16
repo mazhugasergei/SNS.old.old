@@ -330,10 +330,10 @@ menu nav .account-btns .profile .pfp svg path {
 .auth.hidden {
   visibility: hidden;
   opacity: 0;
-  transform: translate(-10%, -50%);
+  transform: translate(-1rem, -50%);
 }
 .auth.hidden.secondary {
-  transform: translate(10%, -50%);
+  transform: translate(1rem, -50%);
 }
 .auth > .title {
   font-size: 2rem;

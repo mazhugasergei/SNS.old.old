@@ -11,12 +11,13 @@ interface SignUpProps {
   setPassword: (state: string) => void
   repeatPassword: string
   setRepeatPassword: (state: string) => void
+  error: { status: number, message: string } | null
+  setError: (state: { status: number, message: string } | null) => void
 }
 
-export default ({email, setEmail, password, setPassword, repeatPassword, setRepeatPassword}: SignUpProps) => {
+export default ({email, setEmail, password, setPassword, repeatPassword, setRepeatPassword, error, setError}: SignUpProps) => {
   const dispatch = useDispatch()
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
-  const [error, setError] = useState<{ status: number, message: string } | null>(null) // 1 - user exists | 2 - different passwords
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()

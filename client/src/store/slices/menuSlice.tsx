@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface menuState {
-  opened: boolean,
+  menu_opened: boolean,
   logging_in: boolean,
   signing_up: boolean,
   confirming_email: boolean
 }
 
 const initialState: menuState = {
-  opened: false,
+  menu_opened: false,
   logging_in: false,
   signing_up: false,
   confirming_email: false
@@ -19,7 +19,7 @@ export const menuSlice = createSlice({
   initialState,
   reducers: {
     toggleMenu: state => {
-      state.opened = !state.opened
+      state.menu_opened = !state.menu_opened
     },
     toggleLogIn: state => {
       state.logging_in = !state.logging_in

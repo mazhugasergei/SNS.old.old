@@ -67,9 +67,9 @@ const verify_code = async (req, res) => {
   const code = await VerificationCode.findOne({ email, verificationCode })
     .catch(err => console.error(err))
   // if the code doesn't exists
-  if(!code){ res.json({ status: 1, message: "Wrong code" }); return }
+  if(!code){ res.json({ status: true, message: "Wrong code" }); return }
   // if the code is exprired
-  if(code.expires < Date.now()){ res.json({ status: 2, message: "The code is expired" }); return }
+  if(code.expires < Date.now()){ res.json({ status: true, message: "The code is expired" }); return }
   // create a user
   const user = await User.create({
     email,
@@ -77,11 +77,10 @@ const verify_code = async (req, res) => {
     display_name: email.substring(0, email.indexOf('@')),
     password: await bcrypt.hash(password, 12)
   })
-    .then(user => res.json({
-      _id: user._id,
-      display_name: user.display_name
-    }))
     .catch(err => console.error(err))
+  // token
+  const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '30d' })
+  res.json({ _id: user._id, display_name: user.display_name, token })
 }
 
 export default {

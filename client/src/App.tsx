@@ -14,7 +14,7 @@ import Home from "pages/Home/Home"
 
 export default () => {
   const dispatch = useDispatch()
-  const menu_opened = useSelector((state: RootState) => state.menu.opened)
+  const menu_opened = useSelector((state: RootState) => state.menu.menu_opened)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)

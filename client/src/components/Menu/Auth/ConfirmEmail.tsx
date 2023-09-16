@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { toggleConfirmEmail } from "store/slices/menuSlice"
 import { setUser } from "store/slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -9,23 +9,29 @@ import axios from "axios"
 interface ConfirmEmailProps {
   email: string
   password: string
+  error: { status: number, message: string } | null
+  setError: (state: { status: number, message: string } | null) => void
 }
 
-export default ({email, password}: ConfirmEmailProps) => {
+export default ({email, password, error, setError}: ConfirmEmailProps) => {
   const dispatch = useDispatch()
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
-  const [verificationCode, setverificationCode] = useState("")
-  const [error, setError] = useState<{ status: number, message: string } | null>(null) // 1 - wrong code | 2 - code expired
+  const [verificationCode, setVerificationCode] = useState("")
+
+  useEffect(()=>{
+    // clear input
+    setVerificationCode("")
+  }, [confirming_email])
 
   const handleCodeChange = (e: ChangeEvent) => {
     const input = e.target as HTMLInputElement
     const value = input.value
     const valid = /^[0-9]{0,4}$/.test(value)
     if(valid){
-      setverificationCode(value)
+      setVerificationCode(value)
       setError(null)
     }
-    else setverificationCode(verificationCode)
+    else setVerificationCode(verificationCode)
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -35,7 +41,11 @@ export default ({email, password}: ConfirmEmailProps) => {
       .then(data => {
         if(data.status) setError({ status: data.status, message: data.message })
         else{
+          // set token
+          localStorage.setItem('x-access-token', data.token)
+          // set user info
           dispatch(setUser({_id: data._id, display_name: data.display_name}))
+          // back to menu
           dispatch(toggleConfirmEmail())
         }
       })
@@ -45,7 +55,7 @@ export default ({email, password}: ConfirmEmailProps) => {
     <div className={`auth secondary ${confirming_email ? '' : 'hidden'}`}>
       <div className="title"><MdOutlineMarkEmailUnread />Confirmation code sent to your Email</div>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="****" className={`auth-input ${error && error.status === 1 ? "error" : ""}`} value={verificationCode} onChange={handleCodeChange} required />
+        <input type="text" placeholder="****" className={`auth-input ${error && error.status ? "error" : ""}`} value={verificationCode} onChange={handleCodeChange} required />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Confirm</button>
       </form>

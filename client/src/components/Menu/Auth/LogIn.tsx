@@ -10,12 +10,13 @@ interface LogInProps {
   setEmail: (state: string) => void
   password: string
   setPassword: (state: string) => void
+  error: { status: number, message: string } | null
+  setError: (state: { status: number, message: string } | null) => void
 }
 
-export default ({email, setEmail, password, setPassword}: LogInProps) => {
+export default ({email, setEmail, password, setPassword, error, setError}: LogInProps) => {
   const dispatch = useDispatch()
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
-  const [error, setError] = useState<{ status: number, message: string } | null>(null) // 1 - wrong email | 2 - wrong password
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -30,9 +31,6 @@ export default ({email, setEmail, password, setPassword}: LogInProps) => {
           dispatch(setUser({ _id: data._id, display_name: data.display_name }))
           // back to menu
           dispatch(toggleLogIn())
-          // clear inputs
-          setEmail("")
-          setPassword("")
         }
       })
   }

@@ -10,8 +10,8 @@
   &.hidden{
     visibility: hidden;
     opacity: 0;
-    transform: translate(-10%, -50%);
-    &.secondary{ transform: translate(10%, -50%); }
+    transform: translate(-1rem, -50%);
+    &.secondary{ transform: translate(1rem, -50%); }
   }
 
   & > .title{
