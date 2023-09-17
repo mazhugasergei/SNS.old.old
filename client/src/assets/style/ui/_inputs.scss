@@ -5,6 +5,14 @@ input{
     border-radius: $border-radius;
     padding: 1.25rem;
     &::placeholder{ color: #aaa; }
+
+    &.primary{
+      background: lighten($primary, 5);
+      color: #fff;
+      border-color: transparent;
+      &::placeholder{ color: lighten($primary, 35); }
+    }
+    
     &.error{ border-color: $error !important; }
   }
 }

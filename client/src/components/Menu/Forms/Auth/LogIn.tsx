@@ -28,7 +28,8 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
           // set token
           localStorage.setItem('x-access-token', data.token)
           // set user info
-          dispatch(setUser({ _id: data._id, display_name: data.display_name }))
+          const { _id, username, display_name } = data
+          dispatch(setUser({ _id, username, display_name }))
           // back to menu
           dispatch(toggleLogIn())
         }
@@ -39,8 +40,8 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
     <div className={`auth ${logging_in ? '' : 'hidden'}`}>
       <div className="title">﹏<br/>Welcome back!</div>
       <form onSubmit={handleSubmit}>
-        <input className={`auth-input ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="text" placeholder="Email / Email" required />
-        <input className={`auth-input ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
+        <input className={`primary ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="text" placeholder="Email / Email" required />
+        <input className={`primary ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Log in</button>
       </form>

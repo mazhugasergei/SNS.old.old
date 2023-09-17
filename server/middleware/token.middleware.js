@@ -8,6 +8,7 @@ export default async (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
     if(err){ console.error(err); return }
     req._id = decoded.user._id
+    req.username = decoded.user.username
     req.display_name = decoded.user.display_name
   })
   // if verified, check if the user still exists

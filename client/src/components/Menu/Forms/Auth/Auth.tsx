@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "store/store"
 // components
-import LogIn from "components/Menu/Auth/LogIn"
-import SignUp from "components/Menu/Auth/SignUp"
-import ConfirmEmail from "components/Menu/Auth/ConfirmEmail"
+import LogIn from "components/Menu/Forms/Auth/LogIn"
+import SignUp from "components/Menu/Forms/Auth/SignUp"
+import ConfirmEmail from "components/Menu/Forms/Auth/ConfirmEmail"
 
 export default () => {
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)

@@ -15,9 +15,7 @@ import Home from "pages/Home/Home"
 export default () => {
   const dispatch = useDispatch()
   const menu_opened = useSelector((state: RootState) => state.menu.menu_opened)
-  const logging_in = useSelector((state: RootState) => state.menu.logging_in)
-  const signing_up = useSelector((state: RootState) => state.menu.signing_up)
-  const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
+  const expanded_menu = useSelector((state: RootState) => state.menu.expanded_menu)
 
   useEffect(()=>{
     // checl if logged in with valid token
@@ -25,20 +23,23 @@ export default () => {
       headers:{ "x-access-token": localStorage.getItem('x-access-token') }
     })
       .then(res => res.data)
-      .then(data => dispatch(setUser({ _id: data._id, display_name: data.display_name })))
+      .then(data => {
+        const { _id, username, display_name } = data
+        dispatch(setUser({ _id, username, display_name }))
+      })
   }, [])
 
   return (
     <BrowserRouter basename="/SNS">
       <Menu />
       <MenuBtn />
-      <div className={`content ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up || confirming_email) ? 'hidden' : ''}`}>
+      <div className={`content ${menu_opened ? 'menu-opened' : ''} ${expanded_menu ? 'hidden' : ''}`}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
-      <div className={`content bg-card ${menu_opened ? 'menu-opened' : ''} ${(logging_in || signing_up || confirming_email) ? 'hidden' : ''}`} />
+      <div className={`content bg-card ${menu_opened ? 'menu-opened' : ''} ${expanded_menu ? 'hidden' : ''}`} />
     </BrowserRouter>
   )
 }

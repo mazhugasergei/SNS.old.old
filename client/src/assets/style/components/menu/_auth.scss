@@ -24,13 +24,6 @@
   form{
     display: grid;
     gap: 1rem;
-
-    .auth-input{
-      background: lighten($primary, 5);
-      color: #fff;
-      border-color: transparent;
-      &::placeholder{ color: lighten($primary, 35); }
-    }
     
     .error-message{
       &.hidden{ display: none; }

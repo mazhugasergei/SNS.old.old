@@ -5,7 +5,11 @@ import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 
 const is_auth = async (req, res) => {
-  res.json({ _id: req._id, display_name: req.display_name })
+  res.json({
+    _id: req._id,
+    username: req.username,
+    display_name: req.display_name
+  })
 }
 
 const log_in = async (req, res) => {
@@ -22,7 +26,13 @@ const log_in = async (req, res) => {
   if(!isValid){ res.json({ status: 2, message: "Incorrect password" }); return }
   // token
   const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '30d' })
-  res.json({ _id: user._id, display_name: user.display_name, token })
+
+  res.json({
+    _id: user._id,
+    username: user.username,
+    display_name: user.display_name,
+    token
+  })
 }
 
 const sign_up = async (req, res) => {
@@ -80,7 +90,13 @@ const verify_code = async (req, res) => {
     .catch(err => console.error(err))
   // token
   const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '30d' })
-  res.json({ _id: user._id, display_name: user.display_name, token })
+
+  res.json({
+    _id: user._id,
+    username: user.username,
+    display_name: user.display_name,
+    token
+  })
 }
 
 export default {

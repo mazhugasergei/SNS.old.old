@@ -44,7 +44,8 @@ export default ({email, password, error, setError}: ConfirmEmailProps) => {
           // set token
           localStorage.setItem('x-access-token', data.token)
           // set user info
-          dispatch(setUser({_id: data._id, display_name: data.display_name}))
+          const { _id, username, display_name } = data
+          dispatch(setUser({ _id, username, display_name }))
           // back to menu
           dispatch(toggleConfirmEmail())
         }
@@ -55,7 +56,7 @@ export default ({email, password, error, setError}: ConfirmEmailProps) => {
     <div className={`auth secondary ${confirming_email ? '' : 'hidden'}`}>
       <div className="title"><MdOutlineMarkEmailUnread />Confirmation code sent to your Email</div>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="****" className={`auth-input ${error && error.status ? "error" : ""}`} value={verificationCode} onChange={handleCodeChange} required />
+        <input type="text" placeholder="****" className={`primary ${error && error.status ? "error" : ""}`} value={verificationCode} onChange={handleCodeChange} required />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Confirm</button>
       </form>

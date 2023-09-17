@@ -11,9 +11,10 @@
 @import './ui/buttons';
 @import './ui/inputs';
 @import './components/header';
-@import './components/menu';
-@import './components/menu-btn';
-@import './components/auth';
+@import './components/menu/menu';
+@import './components/menu/menu-btn';
+@import './components/menu/auth';
+@import './components/menu/profile-settings';
 @import './pages/home/home';
 @import './pages/home/components/post';
 @import './pages/log-in_sign-up/log-in_sign-up';

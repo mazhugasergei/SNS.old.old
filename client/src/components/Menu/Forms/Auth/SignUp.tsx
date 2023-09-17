@@ -34,9 +34,9 @@ export default ({email, setEmail, password, setPassword, repeatPassword, setRepe
     <div className={`auth ${signing_up ? '' : 'hidden'}`}>
       <div className="title">﹏<br/>Create your account</div>
       <form onSubmit={handleSubmit}>
-        <input className={`auth-input ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="email" placeholder="Email" required />
-        <input className={`auth-input ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
-        <input className={`auth-input ${error && error.status === 2 ? "error" : ""}`} value={repeatPassword} onChange={e => { setRepeatPassword(e.target.value); setError(null) }} type="password" placeholder="Repeat password" required />
+        <input className={`primary ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="email" placeholder="Email" required />
+        <input className={`primary ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
+        <input className={`primary ${error && error.status === 2 ? "error" : ""}`} value={repeatPassword} onChange={e => { setRepeatPassword(e.target.value); setError(null) }} type="password" placeholder="Repeat password" required />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Sign up</button>
       </form>

@@ -83,6 +83,7 @@ svg {
 }
 
 button {
+  cursor: pointer;
   font-size: 1rem;
   background: none;
   border: none;
@@ -100,11 +101,15 @@ button {
   background: #171717;
   color: #fff;
 }
-.btn.white {
+.btn.white:not(.outline, .transparent) {
   background: #fff;
 }
+.btn.white.transparent {
+  color: #fff;
+}
 .btn.outline {
-  border: 0.0625rem solid #e7e8ec;
+  color: #fff;
+  box-shadow: inset 0 0 0 0.125rem #fff;
 }
 
 input[type=text], input[type=number], input[type=email], input[type=password] {
@@ -118,6 +123,17 @@ input[type=text]::-moz-placeholder, input[type=number]::-moz-placeholder, input[
 }
 input[type=text]::placeholder, input[type=number]::placeholder, input[type=email]::placeholder, input[type=password]::placeholder {
   color: #aaa;
+}
+input[type=text].primary, input[type=number].primary, input[type=email].primary, input[type=password].primary {
+  background: #242424;
+  color: #fff;
+  border-color: transparent;
+}
+input[type=text].primary::-moz-placeholder, input[type=number].primary::-moz-placeholder, input[type=email].primary::-moz-placeholder, input[type=password].primary::-moz-placeholder {
+  color: #707070;
+}
+input[type=text].primary::placeholder, input[type=number].primary::placeholder, input[type=email].primary::placeholder, input[type=password].primary::placeholder {
+  color: #707070;
 }
 input[type=text].error, input[type=number].error, input[type=email].error, input[type=password].error {
   border-color: #E95A45 !important;
@@ -228,6 +244,8 @@ menu nav .account-btns .profile {
   align-items: center;
   gap: 0.5rem;
   text-align: left;
+  padding: 0.5rem;
+  margin: -0.5rem;
 }
 menu nav .account-btns .profile span {
   overflow: hidden;
@@ -347,17 +365,6 @@ menu nav .account-btns .profile .pfp svg path {
   display: grid;
   gap: 1rem;
 }
-.auth form .auth-input {
-  background: #242424;
-  color: #fff;
-  border-color: transparent;
-}
-.auth form .auth-input::-moz-placeholder {
-  color: #707070;
-}
-.auth form .auth-input::placeholder {
-  color: #707070;
-}
 .auth form .error-message {
   color: #E95A45;
   font-size: 0.9rem;
@@ -378,6 +385,55 @@ menu nav .account-btns .profile .pfp svg path {
   color: #fff;
   font-weight: 600;
   text-decoration: underline;
+}
+
+.profile-settings {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: var(--wrapper-padding-inline);
+  right: 17%;
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  transition: 0.25s;
+}
+.profile-settings.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-1rem, -50%);
+}
+.profile-settings.hidden.secondary {
+  transform: translate(1rem, -50%);
+}
+.profile-settings label {
+  font-weight: 500;
+}
+.profile-settings .pfp-cont {
+  position: relative;
+  margin: 0 auto;
+}
+.profile-settings .pfp-cont svg path {
+  fill: #fff;
+}
+.profile-settings .pfp-cont .pfp {
+  display: grid;
+  place-items: center;
+  width: 7rem;
+  aspect-ratio: 1/1;
+  background: #242424;
+  border-radius: 50%;
+}
+.profile-settings .pfp-cont .pfp .profile {
+  font-size: 2.3rem;
+}
+.profile-settings .pfp-cont .edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #313131;
+  border-radius: 50%;
+  padding: 0.75rem;
 }
 
 main.home .posts {
