@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
-import { toggleMenu, toggleLogIn, toggleSignUp, toggleConfirmEmail } from "store/slices/menuSlice"
+import { toggleConfirmingEmail, toggleLoggingIn, toggleMenuOpened, toggleSigningUp } from "store/slices/menuSlice"
 
 export default () => {
   const dispatch = useDispatch()
@@ -10,10 +10,10 @@ export default () => {
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
 
   const handleToggleMenu = () => {
-    if(logging_in) dispatch(toggleLogIn())
-    else if(signing_up) dispatch(toggleSignUp())
-    else if(confirming_email) dispatch(toggleConfirmEmail())
-    dispatch(toggleMenu())
+    if(logging_in) dispatch(toggleLoggingIn())
+    else if(signing_up) dispatch(toggleSigningUp())
+    else if(confirming_email) dispatch(toggleConfirmingEmail())
+    dispatch(toggleMenuOpened())
   }
 
   return { menu_opened, handleToggleMenu }

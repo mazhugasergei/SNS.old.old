@@ -9,9 +9,10 @@ const VerificationCodeSchema = new Schema({
     type: Number,
     required: true
   },
-  expires: {
+  createdAt: {
     type: Date,
-    required: true
+    default: Date.now(),
+    expires: 60
   }
 })
 

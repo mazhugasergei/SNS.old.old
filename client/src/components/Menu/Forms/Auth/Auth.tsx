@@ -7,8 +7,8 @@ import SignUp from "components/Menu/Forms/Auth/SignUp"
 import ConfirmEmail from "components/Menu/Forms/Auth/ConfirmEmail"
 
 export default () => {
+  const expanded_menu = useSelector((state: RootState) => state.menu.expanded_menu)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
-  const signing_up = useSelector((state: RootState) => state.menu.signing_up)
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -26,7 +26,7 @@ export default () => {
       setRepeatPassword("")
       setError(null)
     }
-  }, [logging_in, signing_up])
+  }, [expanded_menu, logging_in])
 
   return (
     <>

@@ -5,7 +5,7 @@ import { RootState } from "store/store"
 import { BiUser, BiSolidPencil } from "react-icons/bi"
 
 export default () => {
-  const profile_settings = useSelector((state: RootState) => state.menu.profile_settings)
+  const editing_profile = useSelector((state: RootState) => state.menu.editing_profile)
   const username = useSelector((state: RootState) => state.user.username)
   const display_name = useSelector((state: RootState) => state.user.display_name)
 
@@ -22,7 +22,7 @@ export default () => {
   }
 
   return (
-    <form className={`profile-settings ${profile_settings ? '' : 'hidden'}`} onSubmit={handleSubmit}>
+    <form className={`profile-settings ${editing_profile ? '' : 'hidden'}`} onSubmit={handleSubmit}>
       <div className="pfp-cont">
         <button type="button" className="pfp">
           <BiUser className="profile" />

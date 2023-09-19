@@ -59,27 +59,28 @@ const sign_up = async (req, res) => {
   transporter.sendMail(message, (err, info) => {
     if(err){ console.error(err); return }
   })
-  // create/update a code record
+  // create/update a code record with expiration in 1 minute
   const code = await VerificationCode.findOne({ email })
     .catch(err => console.error(err))
-  if(code){
-    await VerificationCode.updateOne({ email, verificationCode, expires: Date.now() + 5 * 60 * 1000 })
-      .catch(err => console.error(err))
-  } else {
-    await VerificationCode.create({ email, verificationCode, expires: Date.now() + 5 * 60 * 1000 })
-      .catch(err => console.error(err))
-  }
+  // update
+  if(code) await VerificationCode.updateOne({ email, verificationCode })
+    .catch(err => console.error(err))
+  // create
+  else await VerificationCode.create({ email, verificationCode })
+    .catch(err => console.error(err))
+
   res.send(true)
 }
 
 const verify_code = async (req, res) => {
   const { email, password, verificationCode } = req.body
+  // does exist?
   const code = await VerificationCode.findOne({ email, verificationCode })
     .catch(err => console.error(err))
-  // if the code doesn't exists
-  if(!code){ res.json({ status: true, message: "Wrong code" }); return }
-  // if the code is exprired
-  if(code.expires < Date.now()){ res.json({ status: true, message: "The code is expired" }); return }
+  if(!code){ res.json({ status: true, message: "The code is wrong / expired" }); return }
+  // delete a code record
+  await VerificationCode.findOneAndDelete({ email })
+    .catch(err => console.error(err))
   // create a user
   const user = await User.create({
     email,

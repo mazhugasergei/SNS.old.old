@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
-import { toggleLogIn, toggleSignUp, toggleProfileSettings } from "store/slices/menuSlice"
+import { toggleLoggingIn, toggleSigningUp, toggleConfirmingEmail, toggleEditingProfile, toggleExpandedMenu } from "store/slices/menuSlice"
 // components
 import Auth from "./Forms/Auth/Auth"
 import ProfileSettings from "./Forms/ProfileSettings"
@@ -20,16 +20,16 @@ export default () => {
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
-  const profile_settings = useSelector((state: RootState) => state.menu.profile_settings)
+  const editing_profile = useSelector((state: RootState) => state.menu.editing_profile)
 
   return (
     <menu className={menu_opened ? "" : "hidden"}>
       {/* menu title */}
       <div className="title">
-        <button className={`auth-title ${logging_in ? "" : "hidden"}`} onClick={() => dispatch(toggleLogIn())}><FiArrowLeft /> Log in</button>
-        <button className={`auth-title ${signing_up ? "" : "hidden"}`} onClick={() => dispatch(toggleSignUp())}><FiArrowLeft /> Sign up</button>
-        <button className={`auth-title secondary ${confirming_email ? "" : "hidden"}`} onClick={() => dispatch(toggleSignUp())}><FiArrowLeft /> Email code</button>
-        <button className={`auth-title ${profile_settings ? "" : "hidden"}`} onClick={() => dispatch(toggleProfileSettings())}><FiArrowLeft /> Profile</button>
+        <button className={`auth-title ${logging_in ? "" : "hidden"}`} onClick={() => { dispatch(toggleLoggingIn()); dispatch(toggleExpandedMenu()) }}><FiArrowLeft /> Log in</button>
+        <button className={`auth-title ${signing_up ? "" : "hidden"}`} onClick={() => { dispatch(toggleSigningUp()); dispatch(toggleExpandedMenu()) }}><FiArrowLeft /> Sign up</button>
+        <button className={`auth-title secondary ${confirming_email ? "" : "hidden"}`} onClick={() => { dispatch(toggleConfirmingEmail()); dispatch(toggleSigningUp()) }}><FiArrowLeft /> Email code</button>
+        <button className={`auth-title ${editing_profile ? "" : "hidden"}`} onClick={() => { dispatch(toggleEditingProfile()); dispatch(toggleExpandedMenu()) }}><FiArrowLeft /> Profile</button>
         <button className={`menu-title ${expanded_menu ? "hidden" : ""}`}>Menu</button>
       </div>
       
@@ -43,14 +43,14 @@ export default () => {
         </ul>
         <div className="account-btns">
           { is_auth ?
-            <button className="profile" onClick={() => dispatch(toggleProfileSettings())}>
+            <button className="profile" onClick={() => { dispatch(toggleEditingProfile()); dispatch(toggleExpandedMenu()) }}>
               <div className="pfp"><BiUser /></div>
               <span>{ display_name }</span>
             </button>
             :
             <>
-              <button className="btn transparent" onClick={() => dispatch(toggleLogIn())}>Log in</button>
-              <button className="btn white" onClick={() => dispatch(toggleSignUp())}>Sign up</button>
+              <button className="btn transparent" onClick={() => { dispatch(toggleLoggingIn()); dispatch(toggleExpandedMenu()) }}>Log in</button>
+              <button className="btn white" onClick={() => { dispatch(toggleSigningUp()); dispatch(toggleExpandedMenu()) }}>Sign up</button>
             </>
           }
         </div>

@@ -1,9 +1,10 @@
 import axios from "axios"
-import { FormEvent, useState } from "react"
+import { FormEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { setUser } from "store/slices/userSlice"
-import { toggleLogIn, toggleSignUp } from "store/slices/menuSlice"
+import { toggleExpandedMenu, toggleLoggingIn, toggleSigningUp } from "store/slices/menuSlice"
+import { bindActionCreators } from "@reduxjs/toolkit"
 
 interface LogInProps {
   email: string
@@ -31,7 +32,8 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
           const { _id, username, display_name } = data
           dispatch(setUser({ _id, username, display_name }))
           // back to menu
-          dispatch(toggleLogIn())
+          dispatch(toggleLoggingIn())
+          dispatch(toggleExpandedMenu())
         }
       })
   }
@@ -45,7 +47,7 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Log in</button>
       </form>
-      <div className="bottom-link">Don't have an account? <button className="link" onClick={() => dispatch(toggleSignUp())}>Sign up</button></div>
+      <div className="bottom-link">Don't have an account? <button className="link" onClick={() => { dispatch(toggleLoggingIn()); dispatch(toggleSigningUp()) }}>Sign up</button></div>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import axios from "axios"
 import { FormEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
-import { toggleLogIn, toggleConfirmEmail } from "store/slices/menuSlice"
+import { toggleConfirmingEmail, toggleLoggingIn, toggleSigningUp } from "store/slices/menuSlice"
 
 interface SignUpProps {
   email: string
@@ -26,7 +26,10 @@ export default ({email, setEmail, password, setPassword, repeatPassword, setRepe
       .then(res => res.data)
       .then(data => {
         if(data.status) setError({ status: data.status, message: data.message })
-        else dispatch(toggleConfirmEmail())
+        else{
+          dispatch(toggleSigningUp())
+          dispatch(toggleConfirmingEmail())
+        }
       })
   }
 
@@ -40,7 +43,7 @@ export default ({email, setEmail, password, setPassword, repeatPassword, setRepe
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Sign up</button>
       </form>
-      <div className="bottom-link">Have an account? <button className="link" onClick={() => dispatch(toggleLogIn())}>Log in</button></div>
+      <div className="bottom-link">Have an account? <button className="link" onClick={() => { dispatch(toggleSigningUp()); dispatch(toggleLoggingIn()) }}>Log in</button></div>
     </div>
   )
 }

@@ -6,7 +6,7 @@ interface menuState {
   logging_in: boolean
   signing_up: boolean
   confirming_email: boolean
-  profile_settings: boolean
+  editing_profile: boolean
 }
 
 const initialState: menuState = {
@@ -15,46 +15,29 @@ const initialState: menuState = {
   logging_in: false,
   signing_up: false,
   confirming_email: false,
-  profile_settings: false
+  editing_profile: false
 }
 
 export const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    toggleMenu: state => {
-      state.menu_opened = !state.menu_opened
-    },
-    toggleLogIn: state => {
-      state.expanded_menu = !state.expanded_menu
-      state.logging_in = !state.logging_in
-      state.signing_up = false
-      state.confirming_email = false
-      state.profile_settings = false
-    },
-    toggleSignUp: state => {
-      state.expanded_menu = !state.expanded_menu
-      state.logging_in = false
-      state.signing_up = !state.signing_up
-      state.confirming_email = false
-      state.profile_settings = false
-    },
-    toggleConfirmEmail: state => {
-      state.expanded_menu = !state.expanded_menu
-      state.logging_in = false
-      state.signing_up = false
-      state.confirming_email = !state.confirming_email
-      state.profile_settings = false
-    },
-    toggleProfileSettings: state => {
-      state.expanded_menu = !state.expanded_menu
-      state.logging_in = false
-      state.signing_up = false
-      state.confirming_email = false
-      state.profile_settings = !state.profile_settings
-    }
+    toggleMenuOpened: state => { state.menu_opened = !state.menu_opened },
+    toggleExpandedMenu: state => { state.expanded_menu = !state.expanded_menu },
+    toggleLoggingIn: state => { state.logging_in = !state.logging_in },
+    toggleSigningUp: state => { state.signing_up = !state.signing_up },
+    toggleConfirmingEmail: state => { state.confirming_email = !state.confirming_email },
+    toggleEditingProfile: state => { state.editing_profile = !state.editing_profile },
   }
 })
 
-export const { toggleMenu, toggleLogIn, toggleSignUp, toggleConfirmEmail, toggleProfileSettings } = menuSlice.actions
+export const {
+  toggleMenuOpened,
+  toggleExpandedMenu,
+  toggleLoggingIn,
+  toggleSigningUp,
+  toggleConfirmingEmail,
+  toggleEditingProfile,
+} = menuSlice.actions
+
 export default menuSlice.reducer

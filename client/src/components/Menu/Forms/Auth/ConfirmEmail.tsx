@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { toggleConfirmEmail } from "store/slices/menuSlice"
+import { toggleConfirmingEmail, toggleExpandedMenu } from "store/slices/menuSlice"
 import { setUser } from "store/slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
@@ -47,7 +47,8 @@ export default ({email, password, error, setError}: ConfirmEmailProps) => {
           const { _id, username, display_name } = data
           dispatch(setUser({ _id, username, display_name }))
           // back to menu
-          dispatch(toggleConfirmEmail())
+          dispatch(toggleConfirmingEmail())
+          dispatch(toggleExpandedMenu())
         }
       })
   }
