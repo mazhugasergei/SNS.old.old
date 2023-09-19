@@ -22,6 +22,14 @@ export const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
+    closeAll: state => {
+      state.menu_opened = false
+      state.expanded_menu = false
+      state.logging_in = false
+      state.signing_up = false
+      state.confirming_email = false
+      state.editing_profile = false
+    },
     toggleMenuOpened: state => { state.menu_opened = !state.menu_opened },
     toggleExpandedMenu: state => { state.expanded_menu = !state.expanded_menu },
     toggleLoggingIn: state => { state.logging_in = !state.logging_in },
@@ -32,6 +40,7 @@ export const menuSlice = createSlice({
 })
 
 export const {
+  closeAll,
   toggleMenuOpened,
   toggleExpandedMenu,
   toggleLoggingIn,

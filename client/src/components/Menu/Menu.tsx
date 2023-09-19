@@ -1,21 +1,19 @@
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
-import { toggleLoggingIn, toggleSigningUp, toggleConfirmingEmail, toggleEditingProfile, toggleExpandedMenu } from "store/slices/menuSlice"
+import { toggleLoggingIn, toggleSigningUp, toggleConfirmingEmail, toggleEditingProfile, toggleExpandedMenu, closeAll } from "store/slices/menuSlice"
 // components
 import Auth from "./Forms/Auth/Auth"
 import ProfileSettings from "./Forms/ProfileSettings"
-// hooks
-import useToggleMenu from "hooks/useToggleMenu"
 // icons
 import { FiArrowLeft } from "react-icons/fi"
 import { BiUser } from "react-icons/bi"
 
 export default () => {
-  const { menu_opened, handleToggleMenu } = useToggleMenu()
   const dispatch = useDispatch()
   const is_auth = useSelector((state: RootState) => state.user.is_auth)
   const display_name = useSelector((state: RootState) => state.user.display_name)
+  const menu_opened = useSelector((state: RootState) => state.menu.menu_opened)
   const expanded_menu = useSelector((state: RootState) => state.menu.expanded_menu)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
@@ -36,10 +34,10 @@ export default () => {
       {/* menu items */}
       <nav className={`navigation ${expanded_menu ? "logging-in" : ""}`}>
         <ul>
-          <li><Link to="/" className="btn transparent" onClick={handleToggleMenu}>Home</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={handleToggleMenu}>Lorem</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={handleToggleMenu}>Ipsum</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={handleToggleMenu}>Dolor</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Home</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Lorem</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Ipsum</Link></li>
+          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Dolor</Link></li>
         </ul>
         <div className="account-btns">
           { is_auth ?
