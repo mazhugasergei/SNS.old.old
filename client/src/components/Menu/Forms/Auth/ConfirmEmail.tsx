@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { toggleConfirmingEmail, toggleExpandedMenu } from "store/slices/menuSlice"
+import { toggleConfirmingEmail, toggleEditingProfile } from "store/slices/menuSlice"
 import { setUser } from "store/slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
@@ -16,6 +16,7 @@ interface ConfirmEmailProps {
 export default ({email, password, error, setError}: ConfirmEmailProps) => {
   const dispatch = useDispatch()
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
+  const editing_profile = useSelector((state: RootState) => state.menu.editing_profile)
   const [verificationCode, setVerificationCode] = useState("")
 
   useEffect(()=>{
@@ -41,20 +42,20 @@ export default ({email, password, error, setError}: ConfirmEmailProps) => {
       .then(data => {
         if(data.status) setError({ status: data.status, message: data.message })
         else{
+          const { _id, username, display_name, email, token } = data
           // set token
-          localStorage.setItem('x-access-token', data.token)
+          localStorage.setItem('x-access-token', token)
           // set user info
-          const { _id, username, display_name } = data
-          dispatch(setUser({ _id, username, display_name }))
+          dispatch(setUser({ _id, username, display_name, email }))
           // back to menu
           dispatch(toggleConfirmingEmail())
-          dispatch(toggleExpandedMenu())
+          dispatch(toggleEditingProfile())
         }
       })
   }
 
   return (
-    <div className={`auth secondary ${confirming_email ? '' : 'hidden'}`}>
+    <div className={`auth ${editing_profile ? "" : "secondary"} ${confirming_email ? '' : 'hidden'}`}>
       <div className="title"><MdOutlineMarkEmailUnread />Confirmation code sent to your Email</div>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="****" className={`primary ${error && error.status ? "error" : ""}`} value={verificationCode} onChange={handleCodeChange} required />

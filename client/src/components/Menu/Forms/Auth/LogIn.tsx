@@ -1,10 +1,9 @@
 import axios from "axios"
-import { FormEvent } from "react"
+import { ChangeEvent, FormEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { setUser } from "store/slices/userSlice"
 import { toggleExpandedMenu, toggleLoggingIn, toggleSigningUp } from "store/slices/menuSlice"
-import { bindActionCreators } from "@reduxjs/toolkit"
 
 interface LogInProps {
   email: string
@@ -19,6 +18,14 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
   const dispatch = useDispatch()
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
 
+  const handleChangeUsername = (e: ChangeEvent) => {
+    const input = e.target as HTMLInputElement
+    const value = input.value
+    const regex = /^[a-zA-Z0-9_@.]*$/
+    regex.test(value) && setEmail(value)
+    setError(null)
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     await axios.post(`${process.env.REACT_APP_API}/auth/log-in`, { email, password })
@@ -26,11 +33,11 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
       .then(data => {
         if(data.status) setError({ status: data.status, message: data.message })
         else{
+          const { _id, username, display_name, email, token } = data
           // set token
-          localStorage.setItem('x-access-token', data.token)
+          localStorage.setItem('x-access-token', token)
           // set user info
-          const { _id, username, display_name } = data
-          dispatch(setUser({ _id, username, display_name }))
+          dispatch(setUser({ _id, username, display_name, email }))
           // back to menu
           dispatch(toggleLoggingIn())
           dispatch(toggleExpandedMenu())
@@ -42,8 +49,16 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
     <div className={`auth ${logging_in ? '' : 'hidden'}`}>
       <div className="title">﹏<br/>Welcome back!</div>
       <form onSubmit={handleSubmit}>
-        <input className={`primary ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="text" placeholder="Email / Email" required />
-        <input className={`primary ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
+        <input
+          className={`primary ${error && error.status === 1 ? "error" : ""}`}
+          value={email} onChange={handleChangeUsername}
+          type="text" placeholder="Email / Email" required
+        />
+        <input
+          className={`primary ${error && error.status === 2 ? "error" : ""}`}
+          value={password} onChange={e => { setPassword(e.target.value); setError(null) }}
+          type="password" placeholder="Password" required
+        />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Log in</button>
       </form>

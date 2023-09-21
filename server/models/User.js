@@ -1,22 +1,10 @@
 import { Schema, model } from "mongoose"
 
 const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true
-  },
-  username: {
-    type: String,
-    required: true
-  },
-  display_name: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
+  email: String,
+  username: String,
+  display_name: String,
+  password: String
 }, { timestamps: true })
 
 export default model('user', UserSchema)

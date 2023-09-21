@@ -31,6 +31,7 @@ const log_in = async (req, res) => {
     _id: user._id,
     username: user.username,
     display_name: user.display_name,
+    email: user.email,
     token
   })
 }
@@ -96,6 +97,7 @@ const verify_code = async (req, res) => {
     _id: user._id,
     username: user.username,
     display_name: user.display_name,
+    email: user.email,
     token
   })
 }

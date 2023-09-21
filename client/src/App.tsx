@@ -24,8 +24,8 @@ export default () => {
     })
       .then(res => res.data)
       .then(data => {
-        const { _id, username, display_name } = data
-        dispatch(setUser({ _id, username, display_name }))
+        const { _id, username, display_name, email } = data
+        dispatch(setUser({ _id, username, display_name, email }))
       })
   }, [])
 

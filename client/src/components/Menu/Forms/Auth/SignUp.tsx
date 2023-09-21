@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "store/store"
 import { toggleConfirmingEmail, toggleLoggingIn, toggleSigningUp } from "store/slices/menuSlice"
@@ -19,6 +19,14 @@ export default ({email, setEmail, password, setPassword, repeatPassword, setRepe
   const dispatch = useDispatch()
   const signing_up = useSelector((state: RootState) => state.menu.signing_up)
 
+  const handleChangeUsername = (e: ChangeEvent) => {
+    const input = e.target as HTMLInputElement
+    const value = input.value
+    const regex = /^[a-zA-Z0-9_@.]*$/
+    regex.test(value) && setEmail(value)
+    setError(null)
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if(password != repeatPassword){ setError({ status: 2, message: "Passwords don't match" }); return }
@@ -37,9 +45,21 @@ export default ({email, setEmail, password, setPassword, repeatPassword, setRepe
     <div className={`auth ${signing_up ? '' : 'hidden'}`}>
       <div className="title">﹏<br/>Create your account</div>
       <form onSubmit={handleSubmit}>
-        <input className={`primary ${error && error.status === 1 ? "error" : ""}`} value={email} onChange={e => { setEmail(e.target.value); setError(null) }} type="email" placeholder="Email" required />
-        <input className={`primary ${error && error.status === 2 ? "error" : ""}`} value={password} onChange={e => { setPassword(e.target.value); setError(null) }} type="password" placeholder="Password" required />
-        <input className={`primary ${error && error.status === 2 ? "error" : ""}`} value={repeatPassword} onChange={e => { setRepeatPassword(e.target.value); setError(null) }} type="password" placeholder="Repeat password" required />
+        <input
+          className={`primary ${error && error.status === 1 ? "error" : ""}`}
+          value={email} onChange={handleChangeUsername}
+          type="email" placeholder="Email" required
+        />
+        <input
+          className={`primary ${error && error.status === 2 ? "error" : ""}`}
+          value={password} onChange={e => { setPassword(e.target.value); setError(null) }}
+          type="password" placeholder="Password" required
+        />
+        <input
+          className={`primary ${error && error.status === 2 ? "error" : ""}`}
+          value={repeatPassword} onChange={e => { setRepeatPassword(e.target.value); setError(null) }}
+          type="password" placeholder="Repeat password" required
+        />
         <div className={`error-message ${error ? "" : "hidden"}`}>Uh oh - { error && error.message }</div>
         <button className="btn white submit">Sign up</button>
       </form>

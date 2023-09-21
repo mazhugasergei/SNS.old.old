@@ -7,6 +7,7 @@ import SignUp from "components/Menu/Forms/Auth/SignUp"
 import ConfirmEmail from "components/Menu/Forms/Auth/ConfirmEmail"
 
 export default () => {
+  const transition = useSelector((state: RootState) => state.ui.transition)
   const expanded_menu = useSelector((state: RootState) => state.menu.expanded_menu)
   const logging_in = useSelector((state: RootState) => state.menu.logging_in)
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
@@ -20,12 +21,12 @@ export default () => {
 
   useEffect(()=>{
     // clear forms
-    if(!confirming_email){
+    if(!confirming_email) setTimeout(()=>{
       setEmail("")
       setPassword("")
       setRepeatPassword("")
       setError(null)
-    }
+    }, transition)
   }, [expanded_menu, logging_in])
 
   return (

@@ -16,3 +16,9 @@ input{
     &.error{ border-color: $error !important; }
   }
 }
+    
+.error-message{
+  &.hidden{ display: none; }
+  color: $error;
+  font-size: .9rem;
+}

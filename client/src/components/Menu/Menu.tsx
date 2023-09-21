@@ -4,7 +4,7 @@ import { RootState } from "store/store"
 import { toggleLoggingIn, toggleSigningUp, toggleConfirmingEmail, toggleEditingProfile, toggleExpandedMenu, closeAll } from "store/slices/menuSlice"
 // components
 import Auth from "./Forms/Auth/Auth"
-import ProfileSettings from "./Forms/ProfileSettings"
+import EditingProfile from "./Forms/EditingProfile"
 // icons
 import { FiArrowLeft } from "react-icons/fi"
 import { BiUser } from "react-icons/bi"
@@ -34,10 +34,10 @@ export default () => {
       {/* menu items */}
       <nav className={`navigation ${expanded_menu ? "logging-in" : ""}`}>
         <ul>
-          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Home</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Lorem</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Ipsum</Link></li>
-          <li><Link to="/" className="btn transparent" onClick={() => dispatch(closeAll())}>Dolor</Link></li>
+          <li><Link to="/" className="btn white transparent" onClick={() => dispatch(closeAll())}>Home</Link></li>
+          <li><Link to="/" className="btn white transparent" onClick={() => dispatch(closeAll())}>Lorem</Link></li>
+          <li><Link to="/" className="btn white transparent" onClick={() => dispatch(closeAll())}>Ipsum</Link></li>
+          <li><Link to="/" className="btn white transparent" onClick={() => dispatch(closeAll())}>Dolor</Link></li>
         </ul>
         <div className="account-btns">
           { is_auth ?
@@ -56,7 +56,7 @@ export default () => {
       
       {/* auth forms */}
       <Auth />
-      <ProfileSettings />
+      <EditingProfile />
     </menu>
   )
 }

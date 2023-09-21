@@ -24,12 +24,6 @@
   form{
     display: grid;
     gap: 1rem;
-    
-    .error-message{
-      &.hidden{ display: none; }
-      color: $error;
-      font-size: .9rem;
-    }
   
     .btn.submit{
       font-size: 1rem;
