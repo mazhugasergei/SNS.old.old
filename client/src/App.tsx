@@ -22,10 +22,11 @@ export default () => {
     axios.get(`${process.env.REACT_APP_API}/auth/is-auth`, {
       headers:{ "x-access-token": localStorage.getItem('x-access-token') }
     })
-      .then(res => res.data)
-      .then(data => {
-        const { _id, username, display_name, email } = data
-        dispatch(setUser({ _id, username, display_name, email }))
+      .then(res => {
+        if(res.data){
+          const { _id, username, display_name, email } = res.data
+          dispatch(setUser({ _id, username, display_name, email }))
+        }
       })
   }, [])
 

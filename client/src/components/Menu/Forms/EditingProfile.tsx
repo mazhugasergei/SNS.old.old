@@ -15,8 +15,10 @@ export default () => {
 
   const [newUsername, setNewUsername] = useState("")
   const [newDisplayName, setNewDisplayName] = useState("")
+  const [password, setPassword] = useState("")
+  const [deletingAccount, setDeletingAccount] = useState(false)
   const [error, setError] = useState<{ status: number, message: string } | null>(null)
-    // 1 - ID is in use
+    // 1 - username is in use
 
   useEffect(()=>{
     setNewUsername(username)
@@ -50,6 +52,20 @@ export default () => {
           dispatch(toggleExpandedMenu())
         }
       })
+  }
+
+  const handleLogOut = () => {
+    localStorage.removeItem('x-access-token')
+    dispatch(setUser(null))
+    dispatch(toggleEditingProfile())
+    dispatch(toggleExpandedMenu())
+  }
+
+  const handleDeleteAccount = async () => {
+    await axios.post(`${process.env.REACT_APP_API}/users/delete`, {}, {
+      headers: { "x-access-token": localStorage.getItem('x-access-token') }
+    })
+      .then(res => res.data && handleLogOut())
   }
 
   return (
@@ -86,9 +102,22 @@ export default () => {
       {/* Buttons */}
       <div className="buttons">
         <button className="btn white submit">Save</button>
-        <button className="btn white transparent" type="button">Log out</button>
-        <button className="btn red transparent" type="button">Delete account</button>
+        <button className="btn white transparent" type="button" onClick={handleLogOut}>Log out</button>
+        <button className="btn red transparent" type="button" onClick={() => setDeletingAccount(true)}>Delete account</button>
       </div>
+
+      {/* Dialog Window */}
+      { deletingAccount && <div className="dialog-cont">
+        <div className="dialog" onSubmit={handleDeleteAccount}>
+          <div className="title">Confirm password</div>
+          <input
+            className="primary"
+            value={password} onChange={e => setPassword(e.target.value)}
+            type="password" required
+          />
+          <button className="btn white">Confirm</button>
+        </div>
+      </div> }
     </form>
   )
 }

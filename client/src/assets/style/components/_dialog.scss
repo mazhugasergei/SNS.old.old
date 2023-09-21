@@ -1,0 +1,13 @@
+.dialog-cont{
+  position: absolute;
+  inset: 0;
+  background: #000;
+  .dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $primary;
+    padding: 2rem;
+  }
+}

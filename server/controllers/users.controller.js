@@ -28,6 +28,13 @@ const user_update = async (req, res) => {
   res.json({ token })
 }
 
+const user_delete = async (req, res) => {
+  await User.findByIdAndDelete(req._id)
+    .catch(err => console.error(err))
+  
+  res.send(true)
+}
+
 export default {
-  users_get, user_get, user_update
+  users_get, user_get, user_update, user_delete
 }

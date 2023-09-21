@@ -47,41 +47,6 @@ svg {
   display: block;
 }
 
-.content {
-  overflow-y: auto;
-  position: relative;
-  z-index: 2;
-  height: var(--100dvh, 100vh);
-  transition: 0.25s, height 0s;
-  padding-block: 4.53125rem;
-}
-.content.menu-opened {
-  overflow-y: hidden;
-  transform: scale(0.7) translateX(70%);
-  border-radius: 2rem;
-}
-.content.menu-opened * {
-  pointer-events: none;
-}
-.content.hidden {
-  transform: scale(0.7) translateX(114%);
-}
-
-.content.bg-card {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  background: transparent;
-}
-.content.bg-card.menu-opened {
-  background: #313131;
-  transform: scale(0.63) translateX(64%);
-}
-.content.bg-card.hidden {
-  transform: scale(0.63) translateX(114%);
-}
-
 button {
   cursor: pointer;
   font-size: 1rem;
@@ -181,6 +146,55 @@ header .logo {
   font-size: 1.25rem;
   font-weight: 700;
   margin-right: auto;
+}
+
+.content {
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+  height: var(--100dvh, 100vh);
+  transition: 0.25s, height 0s;
+  padding-block: 4.53125rem;
+}
+.content.menu-opened {
+  overflow-y: hidden;
+  transform: scale(0.7) translateX(70%);
+  border-radius: 2rem;
+}
+.content.menu-opened * {
+  pointer-events: none;
+}
+.content.hidden {
+  transform: scale(0.7) translateX(114%);
+}
+
+.content.bg-card {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background: transparent;
+}
+.content.bg-card.menu-opened {
+  background: #313131;
+  transform: scale(0.63) translateX(64%);
+}
+.content.bg-card.hidden {
+  transform: scale(0.63) translateX(114%);
+}
+
+.dialog-cont {
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+.dialog-cont .dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #171717;
+  padding: 2rem;
 }
 
 menu {

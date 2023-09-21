@@ -7,5 +7,6 @@ const router = express.Router()
 router.get('/', controller.users_get)
 router.get('/:id', controller.user_get)
 router.post('/update', token, controller.user_update)
+router.post('/delete', token, controller.user_delete)
 
 export default router

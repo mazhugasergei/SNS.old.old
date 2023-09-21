@@ -21,12 +21,22 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<userState>) => {
-      state.is_auth = true
-      if(action.payload._id) state._id = action.payload._id
-      state.username = action.payload.username
-      state.display_name = action.payload.display_name
-      state.email = action.payload.email
+    setUser: (state, action: PayloadAction<userState | null>) => {
+      if(action.payload){
+        state.is_auth = true
+        if(action.payload._id) state._id = action.payload._id
+        state.username = action.payload.username
+        state.display_name = action.payload.display_name
+        state.email = action.payload.email
+      }
+      // null payload to log out
+      else{
+        state.is_auth = false
+        state._id = ""
+        state.username = ""
+        state.display_name = ""
+        state.email = ""
+      }
     }
   }
 })
