@@ -95,8 +95,8 @@ button {
   color: #fff;
   font-size: 0.96rem;
   font-weight: 500;
-  border-radius: 0.75rem;
-  padding: 1rem 1.75rem;
+  border-radius: 100vmax;
+  padding: 1.1rem 1.75rem;
 }
 .btn:not(.outline, .transparent) {
   background: #171717;
@@ -129,7 +129,7 @@ button {
 input[type=text], input[type=number], input[type=email], input[type=password] {
   font-size: 1rem;
   border: 0.0625rem solid #e7e8ec;
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
   padding: 1.25rem;
 }
 input[type=text]::-moz-placeholder, input[type=number]::-moz-placeholder, input[type=email]::-moz-placeholder, input[type=password]::-moz-placeholder {
@@ -377,7 +377,7 @@ menu nav .account-btns .profile .pfp svg path {
 .auth > .title {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 .auth > .title svg {
   margin-bottom: 0.75rem;

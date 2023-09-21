@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <header className="wrapper">
-      <Link to="/" className="logo">Moments</Link>
+      <Link to="/" className="logo">Lorem Ipsum</Link>
     </header>
   )
 }

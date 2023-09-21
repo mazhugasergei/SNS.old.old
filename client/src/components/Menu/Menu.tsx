@@ -47,8 +47,8 @@ export default () => {
             </button>
             :
             <>
-              <button className="btn transparent" onClick={() => { dispatch(toggleLoggingIn()); dispatch(toggleExpandedMenu()) }}>Log in</button>
               <button className="btn white" onClick={() => { dispatch(toggleSigningUp()); dispatch(toggleExpandedMenu()) }}>Sign up</button>
+              <button className="btn transparent" onClick={() => { dispatch(toggleLoggingIn()); dispatch(toggleExpandedMenu()) }}>Log in</button>
             </>
           }
         </div>

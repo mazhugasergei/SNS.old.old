@@ -52,7 +52,7 @@ export default ({email, setEmail, password, setPassword, error, setError}: LogIn
         <input
           className={`primary ${error && error.status === 1 ? "error" : ""}`}
           value={email} onChange={handleChangeUsername}
-          type="text" placeholder="Email / Email" required
+          type="text" placeholder="Email / Username" required
         />
         <input
           className={`primary ${error && error.status === 2 ? "error" : ""}`}
