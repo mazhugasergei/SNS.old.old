@@ -5,15 +5,17 @@ button{
   border: none;
 }
 
+$button-padding-block: 1.1rem;
+$button-padding-inline: 1.75rem;
+
 .btn{
   cursor: pointer;
   text-align: center;
   color: #fff;
   font-size: .96rem;
   font-weight: 500;
-  border-radius: 100vmax;
-  // border-radius: $border-radius;
-  padding: 1.1rem 1.75rem;
+  padding: $button-padding-block $button-padding-inline;
+  &:not(.transparent){ border-radius: 100vmax; }
   &:not(.outline, .transparent){ background: $primary; }
   &.outline, &.transparent, &.white{ color: $primary; }
   &.outline{ box-shadow: inset 0 0 0 .125rem $primary; }

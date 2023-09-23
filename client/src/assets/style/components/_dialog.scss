@@ -1,13 +1,69 @@
 .dialog-cont{
   position: absolute;
+  z-index: 1000;
   inset: 0;
-  background: #000;
+  transition: $transition;
+  @keyframes appear {
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+  }
+  animation: $transition/2 appear;
+  &.hidden{ opacity: 0; }
+
+  .bg{
+    position: absolute;
+    inset: 0;
+    background: rgb(#000, .8);
+    backdrop-filter: blur(.75rem);
+  }
+
   .dialog{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column;
+    width: calc(100% - var(--wrapper-padding-inline)*2);
     background: $primary;
+    border-radius: $border-radius;
     padding: 2rem;
+
+    .window-title{
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    input[type=password]{ margin-bottom: .5rem; }
+
+    .checkbox-cont{
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      input[type=checkbox]{ margin-top: .2rem; }
+      label{
+        color: #787878;
+        font-weight: 400;
+      }
+    }
+
+    .buttons-list{
+      display: flex;
+      flex-flow: column;
+      margin-bottom: calc(-1 * $button-padding-block);
+      .btn{
+        text-align: left;
+        padding-left: 0;
+      }
+    }
+
+    .action-btns{
+      display: flex;
+      flex-flow: column;
+      .btn{
+        &:not(.transparent){ margin-block: 1.25rem .35rem; }
+        &.transparent{ margin-bottom: calc(-1 * $button-padding-block); }
+      }
+    }
   }
 }

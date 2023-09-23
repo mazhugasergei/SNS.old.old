@@ -4,7 +4,7 @@ import { RootState } from "store/store"
 import { toggleLoggingIn, toggleSigningUp, toggleConfirmingEmail, toggleEditingProfile, toggleExpandedMenu, closeAll } from "store/slices/menuSlice"
 // components
 import Auth from "./Forms/Auth/Auth"
-import EditingProfile from "./Forms/EditingProfile"
+import EditingProfile from "./Forms/EditingProfile/EditingProfile"
 // icons
 import { FiArrowLeft } from "react-icons/fi"
 import { BiUser } from "react-icons/bi"
@@ -12,6 +12,7 @@ import { BiUser } from "react-icons/bi"
 export default () => {
   const dispatch = useDispatch()
   const is_auth = useSelector((state: RootState) => state.user.is_auth)
+  const pfp = useSelector((state: RootState) => state.user.pfp)
   const display_name = useSelector((state: RootState) => state.user.display_name)
   const menu_opened = useSelector((state: RootState) => state.menu.menu_opened)
   const expanded_menu = useSelector((state: RootState) => state.menu.expanded_menu)
@@ -42,7 +43,9 @@ export default () => {
         <div className="account-btns">
           { is_auth ?
             <button className="profile" onClick={() => { dispatch(toggleEditingProfile()); dispatch(toggleExpandedMenu()) }}>
-              <div className="pfp"><BiUser /></div>
+              <div className="pfp" style={{ backgroundImage: `url('${pfp}')` }}>
+                { !pfp && <BiUser /> }
+              </div>
               <span>{ display_name }</span>
             </button>
             :

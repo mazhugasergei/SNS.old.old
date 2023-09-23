@@ -60,8 +60,10 @@ button {
   color: #fff;
   font-size: 0.96rem;
   font-weight: 500;
-  border-radius: 100vmax;
   padding: 1.1rem 1.75rem;
+}
+.btn:not(.transparent) {
+  border-radius: 100vmax;
 }
 .btn:not(.outline, .transparent) {
   background: #171717;
@@ -185,21 +187,82 @@ header .logo {
 
 .dialog-cont {
   position: absolute;
+  z-index: 1000;
   inset: 0;
-  background: #000;
+  transition: 0.25s;
+  animation: 0.125s appear;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.dialog-cont.hidden {
+  opacity: 0;
+}
+.dialog-cont .bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(0.75rem);
+          backdrop-filter: blur(0.75rem);
 }
 .dialog-cont .dialog {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-flow: column;
+  width: calc(100% - var(--wrapper-padding-inline) * 2);
   background: #171717;
+  border-radius: 0.8rem;
   padding: 2rem;
+}
+.dialog-cont .dialog .window-title {
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+.dialog-cont .dialog input[type=password] {
+  margin-bottom: 0.5rem;
+}
+.dialog-cont .dialog .checkbox-cont {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.dialog-cont .dialog .checkbox-cont input[type=checkbox] {
+  margin-top: 0.2rem;
+}
+.dialog-cont .dialog .checkbox-cont label {
+  color: #787878;
+  font-weight: 400;
+}
+.dialog-cont .dialog .buttons-list {
+  display: flex;
+  flex-flow: column;
+  margin-bottom: -1.1rem;
+}
+.dialog-cont .dialog .buttons-list .btn {
+  text-align: left;
+  padding-left: 0;
+}
+.dialog-cont .dialog .action-btns {
+  display: flex;
+  flex-flow: column;
+}
+.dialog-cont .dialog .action-btns .btn:not(.transparent) {
+  margin-block: 1.25rem 0.35rem;
+}
+.dialog-cont .dialog .action-btns .btn.transparent {
+  margin-bottom: -1.1rem;
 }
 
 menu {
   position: absolute;
-  z-index: 1;
   inset: 0;
   color: #fff;
   transition: 0.25s;
@@ -295,6 +358,8 @@ menu nav .account-btns .profile .pfp {
   aspect-ratio: 1/1;
   background: #212121;
   border-radius: 50%;
+  background-size: cover;
+  background-position: center;
 }
 menu nav .account-btns .profile .pfp svg {
   position: absolute;
@@ -313,7 +378,7 @@ menu nav .account-btns .profile .pfp svg path {
   top: 2.265625rem;
   right: var(--wrapper-padding-inline);
   transform: translateY(-50%);
-  z-index: 1000;
+  z-index: 999;
   width: 3rem;
   height: 3rem;
   padding: 0.75rem;
@@ -415,46 +480,47 @@ menu nav .account-btns .profile .pfp svg path {
   text-decoration: underline;
 }
 
-.profile-settings {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  left: var(--wrapper-padding-inline);
-  right: 17%;
-  display: grid;
+.editing-profile {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   transition: 0.25s;
+  padding-right: var(--wrapper-padding-inline);
 }
-.profile-settings.hidden {
+.editing-profile.hidden {
   visibility: hidden;
   opacity: 0;
-  transform: translate(-1rem, -50%);
+  transform: translateX(-1rem);
 }
-.profile-settings.hidden.secondary {
-  transform: translate(1rem, -50%);
+.editing-profile.hidden.secondary {
+  transform: translateX(1rem);
 }
-.profile-settings label {
-  font-weight: 500;
-  line-height: 3;
-}
-.profile-settings .pfp-cont {
+.editing-profile .pfp-cont {
+  cursor: pointer;
   position: relative;
   margin: 0 auto;
 }
-.profile-settings .pfp-cont svg path {
+.editing-profile .pfp-cont svg path {
   fill: #fff;
 }
-.profile-settings .pfp-cont .pfp {
+.editing-profile .pfp-cont .pfp {
   display: grid;
   place-items: center;
   width: 7rem;
   aspect-ratio: 1/1;
   background: #242424;
   border-radius: 50%;
+  background-size: cover;
+  background-position: center;
 }
-.profile-settings .pfp-cont .pfp .profile {
+.editing-profile .pfp-cont .pfp .profile {
   font-size: 2.3rem;
 }
-.profile-settings .pfp-cont .edit {
+.editing-profile .pfp-cont input[type=file] {
+  display: none;
+}
+.editing-profile .pfp-cont .edit {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -462,18 +528,21 @@ menu nav .account-btns .profile .pfp svg path {
   border-radius: 50%;
   padding: 0.75rem;
 }
-.profile-settings .inputs {
+.editing-profile .inputs {
   display: grid;
   margin-bottom: 1rem;
 }
-.profile-settings .inputs input {
+.editing-profile .inputs input {
   margin-bottom: 0.25rem;
 }
-.profile-settings .buttons {
+.editing-profile .inputs label {
+  line-height: 3;
+}
+.editing-profile .buttons {
   display: grid;
 }
-.profile-settings .buttons .btn:first-child {
-  margin-bottom: 0.5rem;
+.editing-profile .buttons .btn:first-child {
+  margin-bottom: 0.55rem;
 }
 
 main.home .posts {

@@ -7,6 +7,7 @@ import nodemailer from 'nodemailer'
 const is_auth = async (req, res) => {
   res.json({
     _id: req._id,
+    pfp: req.pfp,
     username: req.username,
     display_name: req.display_name
   })

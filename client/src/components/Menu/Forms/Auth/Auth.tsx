@@ -29,6 +29,10 @@ export default () => {
     }, transition)
   }, [expanded_menu, logging_in])
 
+  useEffect(()=>{
+    setError(null)
+  }, [confirming_email])
+
   return (
     <>
       <LogIn {...{email, setEmail, password, setPassword, error, setError}} />

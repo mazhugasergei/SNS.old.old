@@ -4,14 +4,16 @@ import type { PayloadAction } from "@reduxjs/toolkit"
 interface userState {
   is_auth?: boolean
   _id?: string
+  pfp?: string | ArrayBuffer | null
   username: string
   display_name: string
-  email: string
+  email?: string
 }
 
 const initialState: userState = {
   is_auth: false,
   _id: "",
+  pfp: null,
   username: "",
   display_name: "",
   email: ""
@@ -25,6 +27,7 @@ export const userSlice = createSlice({
       if(action.payload){
         state.is_auth = true
         if(action.payload._id) state._id = action.payload._id
+        state.pfp = action.payload.pfp
         state.username = action.payload.username
         state.display_name = action.payload.display_name
         state.email = action.payload.email

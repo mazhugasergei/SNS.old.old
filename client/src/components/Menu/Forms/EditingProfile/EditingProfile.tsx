@@ -5,25 +5,39 @@ import axios from "axios"
 import { toggleEditingProfile, toggleExpandedMenu } from "store/slices/menuSlice"
 import { BiUser, BiSolidPencil } from "react-icons/bi"
 import { setUser } from "store/slices/userSlice"
+import ConfirmDeletion from "./ConfirmDeletion"
+import PFPActionWindow from "./PFPActionWindow"
 
 export default () => {
   const dispatch = useDispatch()
+  const transition = useSelector((state: RootState) => state.ui.transition)
   const editing_profile = useSelector((state: RootState) => state.menu.editing_profile)
+  const pfp = useSelector((state: RootState) => state.user.pfp)
   const username = useSelector((state: RootState) => state.user.username)
   const display_name = useSelector((state: RootState) => state.user.display_name)
   const confirming_email = useSelector((state: RootState) => state.menu.confirming_email)
 
+  const [newPFP, setNewPFP] = useState<string | ArrayBuffer | null>()
   const [newUsername, setNewUsername] = useState("")
   const [newDisplayName, setNewDisplayName] = useState("")
-  const [password, setPassword] = useState("")
-  const [deletingAccount, setDeletingAccount] = useState(false)
+  const [pfpActionWindow, setPfpActionWindow] = useState<boolean | string>(false)
+  const [deletingAccount, setDeletingAccount] = useState<boolean | string>(false)
   const [error, setError] = useState<{ status: number, message: string } | null>(null)
     // 1 - username is in use
 
-  useEffect(()=>{
-    setNewUsername(username)
-    setNewDisplayName(display_name)
-  }, [username, display_name])
+  useEffect(() => setNewPFP(pfp), [pfp])
+  useEffect(() => setNewUsername(username), [username])
+  useEffect(() => setNewDisplayName(display_name), [display_name])
+
+  const handleChangePFP = (e: ChangeEvent) => {
+    const input = e.target as HTMLInputElement
+    const files = input.files
+    if(files && files.length){
+      const reader = new FileReader()
+      reader.onload = () => setNewPFP(reader.result)
+      reader.readAsDataURL(files[0])
+    }
+  }
 
   const handleChangeUsername = (e: ChangeEvent) => {
     const input = e.target as HTMLInputElement
@@ -36,7 +50,7 @@ export default () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     await axios.post(`${process.env.REACT_APP_API}/users/update`,
-      {newUsername, newDisplayName },
+      { newPFP, newUsername, newDisplayName },
       { headers: { "x-access-token": localStorage.getItem('x-access-token') } }
     )
       .then(res => res.data)
@@ -46,7 +60,7 @@ export default () => {
           // set token
           localStorage.setItem('x-access-token', data.token)
           // set user info
-          dispatch(setUser({ username: newUsername, display_name: newDisplayName, email: data.email }))
+          dispatch(setUser({ pfp: newPFP, username: newUsername, display_name: newDisplayName }))
           // back to menu
           dispatch(toggleEditingProfile())
           dispatch(toggleExpandedMenu())
@@ -61,23 +75,30 @@ export default () => {
     dispatch(toggleExpandedMenu())
   }
 
-  const handleDeleteAccount = async () => {
-    await axios.post(`${process.env.REACT_APP_API}/users/delete`, {}, {
-      headers: { "x-access-token": localStorage.getItem('x-access-token') }
-    })
-      .then(res => res.data && handleLogOut())
-  }
+  // disappear transitions
+  useEffect(() => {
+    if(typeof deletingAccount === "string"){
+      const timeoutID = setTimeout(() => setDeletingAccount(false), transition)
+      return () => clearTimeout(timeoutID)
+    }
+  }, [deletingAccount])
+  useEffect(() => {
+    if(typeof pfpActionWindow === "string"){
+      const timeoutID = setTimeout(() => setPfpActionWindow(false), transition)
+      return () => clearTimeout(timeoutID)
+    }
+  }, [pfpActionWindow])
+  useEffect(() => setPfpActionWindow(" "), [newPFP])
 
   return (
-    <form className={`profile-settings ${confirming_email ? "secondary" : ""} ${editing_profile ? '' : 'hidden'}`} onSubmit={handleSubmit}>
+    <div className={`editing-profile ${confirming_email ? "secondary" : ""} ${editing_profile ? '' : 'hidden'}`}>
       {/* Profile Picture */}
-      <div className="pfp-cont">
-        <button type="button" className="pfp">
-          <BiUser className="profile" />
-        </button>
-        <button type="button" className="edit">
-          <BiSolidPencil />
-        </button>
+      <div className="pfp-cont" onClick={() => setPfpActionWindow(true)}>
+        <div className="pfp" style={{ backgroundImage: `url('${newPFP}')` }}>
+          { !newPFP && <BiUser className="profile" /> }
+        </div>
+        <input id="pfpInput" type="file" accept="image/*" onChange={handleChangePFP} />
+        <div className="edit"><BiSolidPencil /></div>
       </div>
 
       <div className="inputs">
@@ -101,23 +122,13 @@ export default () => {
 
       {/* Buttons */}
       <div className="buttons">
-        <button className="btn white submit">Save</button>
-        <button className="btn white transparent" type="button" onClick={handleLogOut}>Log out</button>
-        <button className="btn red transparent" type="button" onClick={() => setDeletingAccount(true)}>Delete account</button>
+        <button className="btn white submit" onClick={handleSubmit}>Save</button>
+        <button className="btn white transparent" onClick={handleLogOut}>Log out</button>
+        <button className="btn red transparent" onClick={() => setDeletingAccount(true)}>Delete account</button>
       </div>
-
-      {/* Dialog Window */}
-      { deletingAccount && <div className="dialog-cont">
-        <div className="dialog" onSubmit={handleDeleteAccount}>
-          <div className="title">Confirm password</div>
-          <input
-            className="primary"
-            value={password} onChange={e => setPassword(e.target.value)}
-            type="password" required
-          />
-          <button className="btn white">Confirm</button>
-        </div>
-      </div> }
-    </form>
+      
+      { pfpActionWindow && <PFPActionWindow {...{pfpActionWindow, setPfpActionWindow, setNewPFP}} /> }
+      { deletingAccount && <ConfirmDeletion {...{deletingAccount, setDeletingAccount}} /> }
+    </div>
   )
 }

@@ -1,6 +1,5 @@
 menu{
   position: absolute;
-  z-index: 1;
   inset: 0;
   color: #fff;
   transition: $transition;
@@ -90,6 +89,8 @@ menu{
           aspect-ratio: 1/1;
           background: lighten($primary, 4);
           border-radius: 50%;
+          background-size: cover;
+          background-position: center;
           svg{
             position: absolute;
             top: 50%;
