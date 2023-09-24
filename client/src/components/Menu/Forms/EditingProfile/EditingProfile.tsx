@@ -127,7 +127,7 @@ export default () => {
         <button className="btn red transparent" onClick={() => setDeletingAccount(true)}>Delete account</button>
       </div>
       
-      { pfpActionWindow && <PFPActionWindow {...{pfpActionWindow, setPfpActionWindow, setNewPFP}} /> }
+      { pfpActionWindow && <PFPActionWindow {...{pfpActionWindow, setPfpActionWindow, newPFP, setNewPFP}} /> }
       { deletingAccount && <ConfirmDeletion {...{deletingAccount, setDeletingAccount}} /> }
     </div>
   )

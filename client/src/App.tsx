@@ -25,7 +25,7 @@ export default () => {
       .then(res => {
         if(res.data){
           const { _id, pfp, username, display_name, email } = res.data
-          dispatch(setUser({ _id, pfp, username, display_name, email }))
+          dispatch(setUser({ _id, pfp: pfp.join(""), username, display_name, email }))
         }
       })
   }, [])

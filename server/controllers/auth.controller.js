@@ -30,6 +30,7 @@ const log_in = async (req, res) => {
 
   res.json({
     _id: user._id,
+    pfp: user.pfp,
     username: user.username,
     display_name: user.display_name,
     email: user.email,
@@ -96,6 +97,7 @@ const verify_code = async (req, res) => {
 
   res.json({
     _id: user._id,
+    pfp: user.pfp,
     username: user.username,
     display_name: user.display_name,
     email: user.email,

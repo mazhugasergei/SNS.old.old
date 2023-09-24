@@ -42,11 +42,11 @@ export default ({email, password, error, setError}: ConfirmEmailProps) => {
       .then(data => {
         if(data.status) setError({ status: data.status, message: data.message })
         else{
-          const { _id, username, display_name, email, token } = data
+          const { _id, pfp, username, display_name, email, token } = data
           // set token
           localStorage.setItem('x-access-token', token)
           // set user info
-          dispatch(setUser({ _id, username, display_name, email }))
+          dispatch(setUser({ _id, pfp: pfp.join(""), username, display_name, email }))
           // back to menu
           dispatch(toggleConfirmingEmail())
           dispatch(toggleEditingProfile())
